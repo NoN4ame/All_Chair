@@ -1,0 +1,69 @@
+@import "../fonts and variables/fonts/fonts"
+@import "../fonts and variables/variables"
+*
+  margin: 0
+  padding: 0
+  font-family: 'Montserrat', sans-serif
+.container
+  width: 1920px - 405px - 402px
+  margin: 0 auto
+.header__content
+  display: flex
+  padding: 41px 0
+  &__logo
+    display: flex
+    align-items: center
+    font-weight: bold
+    width: 48px
+    background-color: $pink
+    transition: width 0.3s
+    position: absolute
+    &:hover
+      width: 115px
+      color: white
+    & a
+      text-decoration: none
+      &:hover
+        color: white
+  &__name
+    font-size: 18px
+    color: #000000
+    z-index: 10
+    white-space: nowrap
+    padding-right: 15px
+    &:hover
+      color: white
+    & > span
+      font-size: 18px
+      padding-left: 20px
+      color: white
+      background-color: $pink
+      width: 27px
+  &__phone
+    margin-right: 92px
+    margin-top: 2px
+    font-size: $little_text
+    font-weight: 500
+  &__cart
+    margin-top: 2px
+    font-size: $little_text
+    font-weight: 500
+  &__cart:hover
+    color: $pink
+    cursor: pointer
+.navigation
+  margin-left: 260px
+  margin-right: 167px
+  margin-top: 2px
+  & ul
+    display: flex
+    list-style-type: none
+  &__text
+    font-size: $little_text
+    font-weight: 500
+    padding-right: 60px
+    &:last-child
+      padding-right: 0
+    &:hover
+      color: $pink
+      cursor: pointer
