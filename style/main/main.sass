@@ -1,1 +1,59 @@
 @import "../header-footer/header"
+.btn
+  margin-top: 45px
+  padding: 24px 70px
+  background-color: $pink
+  font-size: 18px
+  color: white
+  border: 1px solid $pink
+  outline: none
+  font-weight: bold
+  &:hover
+    box-shadow: 0 4px 10px rgba(245, 79, 79, 0.44)
+    cursor: pointer
+.category
+  font-size: $category
+  font-weight: bold
+  color: $black
+  margin-top: 150px
+  margin-bottom: 80px
+main
+  overflow: hidden
+  margin-bottom: 150px
+.banner
+  position: relative
+  &>img
+    position: relative
+    right: 406px
+    z-index: 1
+  &__text
+    position: absolute
+    top: 160px
+    z-index: 10
+    & p
+      font-size: $price
+      color: $black
+    & h1
+      font-size: $category + 6px
+      padding-top: 14px
+      padding-bottom: 45px
+.goods__content
+  display: grid
+  grid-template-columns: repeat(3, 327px)
+  row-gap: 80px
+  column-gap: 66px
+  &>.product
+    text-align: center
+.product
+  &__name
+    font-size: $project_name
+    font-weight: bold
+    padding-top: 17px
+    padding-bottom: 7px
+  &__characteristics
+    font-size: $little_text
+    color: $gray
+  &__price
+    font-size: $price
+    color: $black
+    padding-top: 32px
