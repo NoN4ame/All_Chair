@@ -1,4 +1,6 @@
 @import "../header-footer/header"
+@import "../header-footer/footer"
+@import "../common styles/common-styles"
 .btn
   margin-top: 45px
   padding: 24px 70px
@@ -22,7 +24,6 @@
 
 main
   overflow: hidden
-  margin-bottom: 150px
 
 .banner
   position: relative
@@ -56,6 +57,8 @@ main
     text-align: center
 
 .product
+  & img
+    width: 309px
   &__name
     font-size: $project_name
     font-weight: bold
@@ -102,3 +105,30 @@ main
     z-index: 1
 .about-us
   margin-top: 202px
+  position: relative
+  height: 591px
+  &__text
+    position: absolute
+    z-index: 10
+    & >.category
+      margin-top: 100px
+      margin-bottom: 40px
+    & >.people-position
+      padding-bottom: 40px
+    & >.people-thoughts
+      font-size: $price
+      line-height: 1.3
+      padding-bottom: 41px
+    & > a
+      color: $pink
+      font-size: $price
+      text-decoration: none
+      border-bottom: 1px solid $pink
+      &:hover
+        color: $black
+        border-bottom: 1px solid $black
+  & > img
+    position: relative
+    top: -51px
+    left: -405px
+    z-index: 1

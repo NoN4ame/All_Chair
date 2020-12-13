@@ -1,3 +1,9 @@
+footer {
+  background-color: #323232;
+}
 
+.footer__content {
+  display: flex;
+}
 
 /*# sourceMappingURL=footer.css.map */
