@@ -1,0 +1,37 @@
+.people-name
+  font-size: $project-name
+  color: $pink
+  font-weight: bold
+  padding-bottom: 8px
+.people-position
+  color: $gray
+  font-size: $little_text
+.logo
+  display: flex
+  align-items: center
+  font-weight: bold
+  width: 48px
+  background-color: $pink
+  transition: width 0.3s
+  position: absolute
+  &:hover
+    width: 115px
+    color: white
+  & a
+    text-decoration: none
+    &:hover
+      color: white
+  &__name
+    font-size: 18px
+    color: #000000
+    z-index: 10
+    white-space: nowrap
+    padding-right: 15px
+    &:hover
+      color: white
+    & > span
+      font-size: 18px
+      padding-left: 20px
+      color: white
+      background-color: $pink
+      width: 27px
