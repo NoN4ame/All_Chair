@@ -41,6 +41,7 @@
   z-index: 10;
   white-space: nowrap;
   padding-right: 15px;
+  transition: color 0.3s;
 }
 .logo__name:hover {
   color: white;
@@ -262,6 +263,7 @@ footer {
   z-index: 10;
   white-space: nowrap;
   padding-right: 15px;
+  transition: color 0.3s;
 }
 .logo__name:hover {
   color: white;
