@@ -103,6 +103,7 @@
 .subscribe {
   position: relative;
   margin-top: 300px;
+  height: 492px;
 }
 .subscribe__text {
   position: absolute;
@@ -131,6 +132,28 @@
   top: -150px;
   left: -405px;
   z-index: 1;
+}
+
+.banner {
+  padding-top: 281px;
+  background-color: #F6F6F4;
+  height: 210px;
+  width: 100%;
+}
+.banner > .container {
+  position: relative;
+}
+.banner > .container > .category {
+  margin: 0;
+  font-size: 36px;
+  padding-bottom: 168px;
+  position: absolute;
+  z-index: 10;
+}
+.banner__img {
+  position: absolute;
+  top: -180px;
+  left: -406px;
 }
 
 * {
@@ -325,6 +348,7 @@ footer {
 .subscribe {
   position: relative;
   margin-top: 300px;
+  height: 492px;
 }
 .subscribe__text {
   position: absolute;
@@ -355,23 +379,41 @@ footer {
   z-index: 1;
 }
 
+.banner {
+  padding-top: 281px;
+  background-color: #F6F6F4;
+  height: 210px;
+  width: 100%;
+}
+.banner > .container {
+  position: relative;
+}
+.banner > .container > .category {
+  margin: 0;
+  font-size: 36px;
+  padding-bottom: 168px;
+  position: absolute;
+  z-index: 10;
+}
+.banner__img {
+  position: absolute;
+  top: -180px;
+  left: -406px;
+}
+
 main {
   overflow: hidden;
   padding-top: 102px;
 }
 
 .banner {
-  position: relative;
-}
-.banner > img {
-  position: relative;
-  right: 406px;
-  z-index: 1;
+  background-color: transparent;
+  height: 427px;
 }
 .banner__text {
   position: absolute;
-  top: 160px;
   z-index: 10;
+  top: -17px;
 }
 .banner__text p {
   font-size: 20px;
