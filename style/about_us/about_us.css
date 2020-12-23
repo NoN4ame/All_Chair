@@ -37,7 +37,7 @@
 }
 .logo__name {
   font-size: 18px;
-  color: #000000;
+  color: #323232;
   z-index: 10;
   white-space: nowrap;
   padding-right: 15px;
@@ -64,6 +64,11 @@
 
 .product {
   text-align: center;
+  transition: 0.4s;
+}
+.product:hover {
+  transform: scale(1.2);
+  cursor: pointer;
 }
 .product img {
   width: 309px;
@@ -319,12 +324,29 @@ footer {
 }
 .our-projects__content div {
   margin-right: 12px;
+  transition: 0.6s;
 }
 .our-projects__content div:nth-child(1) {
   margin-bottom: 5px;
 }
 .our-projects__content div:nth-child(even) {
   margin-right: 0;
+}
+.our-projects__content div:hover {
+  filter: brightness(0.7);
+  cursor: pointer;
+}
+.our-projects__content div:hover:hover > .open-img {
+  display: block;
+  top: 45%;
+  left: 50%;
+}
+.our-projects__content div:hover:hover:nth-child(2) > .open-img {
+  left: 45%;
+}
+.our-projects__content div > .open-img {
+  display: none;
+  position: absolute;
 }
 
 .our-choice {

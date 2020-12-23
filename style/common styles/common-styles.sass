@@ -23,7 +23,7 @@
       color: white
   &__name
     font-size: 18px
-    color: #000000
+    color: $black
     z-index: 10
     white-space: nowrap
     padding-right: 15px
@@ -45,6 +45,10 @@
 
 .product
   text-align: center
+  transition: 0.4s
+  &:hover
+    transform: scale(1.2)
+    cursor: pointer
   & img
     width: 309px
   &__name

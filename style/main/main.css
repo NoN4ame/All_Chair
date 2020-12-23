@@ -37,7 +37,7 @@
 }
 .logo__name {
   font-size: 18px;
-  color: #000000;
+  color: #323232;
   z-index: 10;
   white-space: nowrap;
   padding-right: 15px;
@@ -64,6 +64,11 @@
 
 .product {
   text-align: center;
+  transition: 0.4s;
+}
+.product:hover {
+  transform: scale(1.2);
+  cursor: pointer;
 }
 .product img {
   width: 309px;
@@ -282,7 +287,7 @@ footer {
 }
 .logo__name {
   font-size: 18px;
-  color: #000000;
+  color: #323232;
   z-index: 10;
   white-space: nowrap;
   padding-right: 15px;
@@ -309,6 +314,11 @@ footer {
 
 .product {
   text-align: center;
+  transition: 0.4s;
+}
+.product:hover {
+  transform: scale(1.2);
+  cursor: pointer;
 }
 .product img {
   width: 309px;
