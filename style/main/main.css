@@ -161,6 +161,56 @@
   left: -406px;
 }
 
+.card {
+  display: flex;
+  z-index: 100;
+  position: fixed;
+  left: 27%;
+  top: 20%;
+  background-color: white;
+  padding: 94px 76px 88px 46px;
+}
+.card > .close {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  right: 25px;
+  top: 25px;
+  cursor: pointer;
+}
+.card > .container {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.card img {
+  width: 382px;
+  height: 438px;
+}
+.card__name {
+  font-size: 30px;
+  color: #323232;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+.card__vendorCode {
+  font-size: 16px;
+  color: #9c9c9c;
+  padding-bottom: 23px;
+}
+.card__price {
+  font-size: 24px;
+  color: #323232;
+}
+.card__info > .btn {
+  margin-top: 34px;
+  margin-bottom: 45px;
+  padding: 23px 64px 25px 72px;
+}
+.card__aboutGoods {
+  font-size: 16px;
+  color: #323232;
+  line-height: 1.3;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -409,6 +459,56 @@ footer {
   position: absolute;
   top: -180px;
   left: -406px;
+}
+
+.card {
+  display: flex;
+  z-index: 100;
+  position: fixed;
+  left: 27%;
+  top: 20%;
+  background-color: white;
+  padding: 94px 76px 88px 46px;
+}
+.card > .close {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  right: 25px;
+  top: 25px;
+  cursor: pointer;
+}
+.card > .container {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.card img {
+  width: 382px;
+  height: 438px;
+}
+.card__name {
+  font-size: 30px;
+  color: #323232;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+.card__vendorCode {
+  font-size: 16px;
+  color: #9c9c9c;
+  padding-bottom: 23px;
+}
+.card__price {
+  font-size: 24px;
+  color: #323232;
+}
+.card__info > .btn {
+  margin-top: 34px;
+  margin-bottom: 45px;
+  padding: 23px 64px 25px 72px;
+}
+.card__aboutGoods {
+  font-size: 16px;
+  color: #323232;
+  line-height: 1.3;
 }
 
 main {

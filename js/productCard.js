@@ -11,41 +11,86 @@
 
 const prodCard = {
     pro: [],
-    init(){
+    init() {
         this.productInfo()
 
     },
-    productInfo(){
+    productInfo() {
         // Находим обертку товара
         let goods = document.querySelectorAll('.product');
         // Вешаем обработчики события на каждый товар
-        for (let i = 0; i < goods.length; i++){
+        for (let i = 0; i < goods.length; i++) {
             goods[i].addEventListener('click', (event) => {
                 // Получаем полную карточку товара при клике
                 let productContainer = event.target.parentNode
-                console.log(productContainer);
-                // Находим в родителе нужные параметры цены и название
-                let name = productContainer.querySelectorAll('.product__name')
-                let price = productContainer.querySelectorAll('.product__price')
-                console.log(name[0])
-                console.log(price[0])
-                // Получаем значение внутри карточки товара
-                //let productVal = productContainer.children
-                //// Перебираем
-                //for ( let elem of productVal) {
-                //    console.log(elem.innerHTML)
-                //    for (let g = 0; g < elem.length; g++) {
-                //        console.log(g);
-                //    }
-                //}
-                //console.log(this.pro)
-                //for (let g = 0; 0 < this.pro.length; g++){
-                //    console.log(g)
-                //}
+                // Находим в родителе:
+                // Картинка
+                let img = productContainer.getElementsByTagName('img'),
+                    // Путь до картинки
+                    imgSrc = img[0].getAttribute('src')
+                // Имя продукта
+                let name = productContainer.querySelectorAll('.product__name');
+                // Цена продукта
+                let price = productContainer.querySelectorAll('.product__price');
+                // Вызываем метод отрисовки карточки товара
+                this.renderCard(imgSrc, name[0].textContent, price[0].textContent)
+                this.triggers()
             })
         }
     },
-
+    // Метод отрисовки карточки товара
+    renderCard(imgSrc, name, price) {
+        // Ищем контейнер в который передастся карточка товара
+        let cardContainer = document.querySelector('main')
+            cardContainer.insertAdjacentHTML('afterbegin',
+            `  <div class="card">
+                        <img src="${imgSrc}" alt="">
+                        <img class="close" src="../img/other/close.svg" alt="close">
+                        <div class="card__info">
+                            <p class="card__name">${name}</p>
+                            <p class="card__vendorCode">Артикль: ${Math.floor(Math.random()*10000)}</p>
+                            <p class="card__price">${price}</p>
+                            <button class="btn">В корзину</button>
+                            <p class="card__aboutGoods">The Series 7™ chair is an icon in modern<br>
+                               furniture history, designed by Arne Jacobsen<br>
+                               in 1955. Its unique shape is timeless and<br>
+                               incredibly versatile, displaying character<br>
+                               without overpowering the eye. The chair is<br>
+                               made from 9 layers of pressure moulded<br>
+                               veneer for strength, flexibility and durability<br>
+                               despite its slender form. This is the most<br>
+                               popular design within Fritz Hansen's chair<br>
+                               collection.</p>
+                        </div>
+                    </div>`)
+        this.styleCard()
+    },
+    styleCard() {
+            document.querySelector('body').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+            document.querySelector('header').style.filter = 'brightness(0.5)'
+            document.querySelectorAll('.container')
+                .forEach(div => div.style.filter = 'brightness(0.5)')
+            document.querySelectorAll('.container')[0].style.filter = 'none'
+    },
+    triggers(){
+        let close = document.querySelector('.close');
+        close.addEventListener('click', (e) => {
+            if (e.target === close){
+                document.querySelector('.card').remove()
+                document.querySelector('body').style.backgroundColor = 'transparent'
+                document.querySelector('header').style.filter = 'none'
+                document.querySelectorAll('.container')
+                    .forEach(div => div.style.filter = 'none')
+            }
+        } )
+        // Вешаем обработчик событий на кнопку закрыть
+        //let closeBtn = document.querySelector('.close')
+        //closeBtn.addEventListener('click', (e) => {
+        //       if (e.target === closeBtn) {
+        //           document.querySelector('.card').remove()
+        //       }
+        //    })
+    }
 }
 
 prodCard.init()

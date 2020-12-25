@@ -119,3 +119,43 @@
     position: absolute
     top: -180px
     left: -406px
+.card
+  display: flex
+  z-index: 100
+  position: fixed
+  left: 27%
+  top: 20%
+  background-color: white
+  padding: 94px 76px 88px 46px
+  & > .close
+    position: absolute
+    width: 36px
+    height: 36px
+    right: 25px
+    top: 25px
+    cursor: pointer
+  & > .container
+    background-color: rgba(0, 0, 0, 0.5)
+  & img
+    width: 382px
+    height: 438px
+  &__name
+    font-size: $category
+    color: $black
+    font-weight: bold
+    padding-bottom: 15px
+  &__vendorCode
+    font-size: $little_text
+    color: $gray
+    padding-bottom: 23px
+  &__price
+    font-size: $project_name
+    color: $black
+  &__info > .btn
+    margin-top: 34px
+    margin-bottom: 45px
+    padding: 23px 64px 25px 72px
+  &__aboutGoods
+    font-size: $little_text
+    color: $black
+    line-height: 1.3
