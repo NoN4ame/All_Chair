@@ -78,7 +78,8 @@ const prodCard = {
     triggers() {
         let card = document.querySelector('.invisible');
         card.addEventListener('click', (e) => {
-            if (e.target === document.querySelector('.close') || e.target === document.querySelector('.invisible')) {
+            if (e.target === document.querySelector('.close')
+                || e.target === document.querySelector('.invisible')) {
                 document.querySelector('.card').remove()
                 document.querySelector('.invisible').remove()
                 document.querySelector('body').style.backgroundColor = 'transparent'
