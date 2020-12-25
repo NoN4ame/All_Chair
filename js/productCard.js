@@ -42,13 +42,15 @@ const prodCard = {
     renderCard(imgSrc, name, price) {
         // Ищем контейнер в который передастся карточка товара
         let cardContainer = document.querySelector('main')
-            cardContainer.insertAdjacentHTML('afterbegin',
-            `  <div class="card">
+        // Прописываем HTML шаблон
+        cardContainer.insertAdjacentHTML('afterbegin',
+            `  <div class="invisible">
+                        <div class="card">
                         <img src="${imgSrc}" alt="">
                         <img class="close" src="../img/other/close.svg" alt="close">
                         <div class="card__info">
                             <p class="card__name">${name}</p>
-                            <p class="card__vendorCode">Артикль: ${Math.floor(Math.random()*10000)}</p>
+                            <p class="card__vendorCode">Артикль: ${Math.floor(Math.random() * 10000)}</p>
                             <p class="card__price">${price}</p>
                             <button class="btn">В корзину</button>
                             <p class="card__aboutGoods">The Series 7™ chair is an icon in modern<br>
@@ -62,34 +64,29 @@ const prodCard = {
                                popular design within Fritz Hansen's chair<br>
                                collection.</p>
                         </div>
-                    </div>`)
+                        </div>
+                       </div>`)
         this.styleCard()
     },
     styleCard() {
-            document.querySelector('body').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-            document.querySelector('header').style.filter = 'brightness(0.5)'
-            document.querySelectorAll('.container')
+        document.querySelector('body').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+        document.querySelector('header').style.filter = 'brightness(0.5)'
+        document.querySelectorAll('.container')
                 .forEach(div => div.style.filter = 'brightness(0.5)')
-            document.querySelectorAll('.container')[0].style.filter = 'none'
+        document.querySelectorAll('.container')[0].style.filter = 'none'
     },
-    triggers(){
-        let close = document.querySelector('.close');
-        close.addEventListener('click', (e) => {
-            if (e.target === close){
+    triggers() {
+        let card = document.querySelector('.invisible');
+        card.addEventListener('click', (e) => {
+            if (e.target === document.querySelector('.close') || e.target === document.querySelector('.invisible')) {
                 document.querySelector('.card').remove()
+                document.querySelector('.invisible').remove()
                 document.querySelector('body').style.backgroundColor = 'transparent'
                 document.querySelector('header').style.filter = 'none'
                 document.querySelectorAll('.container')
-                    .forEach(div => div.style.filter = 'none')
+                        .forEach(div => div.style.filter = 'none')
             }
-        } )
-        // Вешаем обработчик событий на кнопку закрыть
-        //let closeBtn = document.querySelector('.close')
-        //closeBtn.addEventListener('click', (e) => {
-        //       if (e.target === closeBtn) {
-        //           document.querySelector('.card').remove()
-        //       }
-        //    })
+        })
     }
 }
 

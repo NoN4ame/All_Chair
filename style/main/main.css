@@ -161,6 +161,15 @@
   left: -406px;
 }
 
+.invisible {
+  z-index: 10000;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  left: 0;
+}
+
 .card {
   display: flex;
   z-index: 100;
@@ -459,6 +468,15 @@ footer {
   position: absolute;
   top: -180px;
   left: -406px;
+}
+
+.invisible {
+  z-index: 10000;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  left: 0;
 }
 
 .card {
