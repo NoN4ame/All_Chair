@@ -1,20 +1,10 @@
-/*
-1 метод
-* По клику узнаем на какой товар был клик
-* Узнаем путь до картинки
-* Название и цену
-2 метод
-* Отрисовываем шаблон карточки товара
-* Подставляем туда актуальные эл-ты
-*
-*/
-
 const prodCard = {
-    pro: [],
+    // Инициализация карточки товара
     init() {
         this.productInfo()
 
     },
+    // Все о товаре
     productInfo() {
         // Находим обертку товара
         let goods = document.querySelectorAll('.product');
@@ -66,8 +56,10 @@ const prodCard = {
                         </div>
                         </div>
                        </div>`)
+        // Вызов стилей при открытой карточке товара
         this.styleCard()
     },
+    // Стили заднего фона при открытой карточке
     styleCard() {
         document.querySelector('body').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
         document.querySelector('header').style.filter = 'brightness(0.5)'
@@ -75,9 +67,13 @@ const prodCard = {
                 .forEach(div => div.style.filter = 'brightness(0.5)')
         document.querySelectorAll('.container')[0].style.filter = 'none'
     },
+    // Событие закрытия карточки товара
     triggers() {
+        // Получаем блок обертку
         let card = document.querySelector('.invisible');
+        // Вешаем на него обработчик событий
         card.addEventListener('click', (e) => {
+            // Если клик был по блоку или на иконку 'X', то закрываем карточку товара
             if (e.target === document.querySelector('.close')
                 || e.target === document.querySelector('.invisible')) {
                 document.querySelector('.card').remove()
@@ -88,7 +84,15 @@ const prodCard = {
                         .forEach(div => div.style.filter = 'none')
             }
         })
+        // Вешаем обработчик при наведении
+        card.addEventListener('mouseover', (e) => {
+            // Если наведение было по иконке 'X'
+            if (e.target === document.querySelector('.close')){
+                // Меняем ее на иконку розового цвета
+                document.querySelector('.close').src='../img/other/close-pink.svg'
+                    // Если курсор не на иконке, то оставляем стандартную иконку
+                    } else document.querySelector('.close').src='../img/other/close.svg'
+        })
     }
 }
-
 prodCard.init()

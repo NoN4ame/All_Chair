@@ -4,6 +4,101 @@
   src: url("../fonts/Montserrat-Medium.ttf");
   src: url("../fonts/Montserrat-Regular.ttf");
 }
+.subscribe-card {
+  z-index: 100;
+  position: fixed;
+  left: 33%;
+  top: 16%;
+  background-color: white;
+}
+.subscribe-card__text {
+  color: #323232;
+  padding-left: 76px;
+}
+.subscribe-card__text:nth-child(3) {
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 48px;
+  padding-bottom: 24px;
+}
+.subscribe-card__text:nth-child(4) {
+  font-size: 20px;
+}
+.subscribe-card form {
+  padding-bottom: 69px;
+}
+.subscribe-card form > input {
+  padding: 24px 9px 24px 28px;
+  border: 1px solid #9c9c9c;
+  outline: none;
+  font-size: 18px;
+  color: #9c9c9c;
+  margin-left: 76px;
+}
+.subscribe-card form > .btn {
+  padding: 24px 49px 24px 50px;
+  margin-left: 26px;
+  margin-top: 29px;
+}
+.subscribe-card > .close {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  right: 25px;
+  top: 25px;
+  cursor: pointer;
+}
+
+.card {
+  display: flex;
+  z-index: 100;
+  position: fixed;
+  left: 27%;
+  top: 20%;
+  background-color: white;
+  padding: 94px 76px 88px 46px;
+}
+.card > .close {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  right: 25px;
+  top: 25px;
+  cursor: pointer;
+}
+.card > .container {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.card img {
+  width: 382px;
+  height: 438px;
+}
+.card__name {
+  font-size: 30px;
+  color: #323232;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+.card__vendorCode {
+  font-size: 16px;
+  color: #9c9c9c;
+  padding-bottom: 23px;
+}
+.card__price {
+  font-size: 24px;
+  color: #323232;
+}
+.card__info > .btn {
+  margin-top: 34px;
+  margin-bottom: 45px;
+  padding: 23px 64px 25px 72px;
+}
+.card__aboutGoods {
+  font-size: 16px;
+  color: #323232;
+  line-height: 1.3;
+}
+
 .people-name {
   font-size: 24px;
   color: #f54f4f;
@@ -107,7 +202,7 @@
 
 .subscribe {
   position: relative;
-  margin-top: 300px;
+  margin-top: 230px;
   height: 492px;
 }
 .subscribe__text {
@@ -133,9 +228,9 @@
   margin-bottom: 40px;
 }
 .subscribe img {
-  position: relative;
+  position: absolute;
   top: -150px;
-  left: -405px;
+  left: -412px;
   z-index: 1;
 }
 
@@ -158,7 +253,7 @@
 .banner__img {
   position: absolute;
   top: -180px;
-  left: -406px;
+  left: -412px;
 }
 
 .invisible {
@@ -313,6 +408,101 @@ footer {
   color: #f54f4f;
 }
 
+.subscribe-card {
+  z-index: 100;
+  position: fixed;
+  left: 33%;
+  top: 16%;
+  background-color: white;
+}
+.subscribe-card__text {
+  color: #323232;
+  padding-left: 76px;
+}
+.subscribe-card__text:nth-child(3) {
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 48px;
+  padding-bottom: 24px;
+}
+.subscribe-card__text:nth-child(4) {
+  font-size: 20px;
+}
+.subscribe-card form {
+  padding-bottom: 69px;
+}
+.subscribe-card form > input {
+  padding: 24px 9px 24px 28px;
+  border: 1px solid #9c9c9c;
+  outline: none;
+  font-size: 18px;
+  color: #9c9c9c;
+  margin-left: 76px;
+}
+.subscribe-card form > .btn {
+  padding: 24px 49px 24px 50px;
+  margin-left: 26px;
+  margin-top: 29px;
+}
+.subscribe-card > .close {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  right: 25px;
+  top: 25px;
+  cursor: pointer;
+}
+
+.card {
+  display: flex;
+  z-index: 100;
+  position: fixed;
+  left: 27%;
+  top: 20%;
+  background-color: white;
+  padding: 94px 76px 88px 46px;
+}
+.card > .close {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  right: 25px;
+  top: 25px;
+  cursor: pointer;
+}
+.card > .container {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.card img {
+  width: 382px;
+  height: 438px;
+}
+.card__name {
+  font-size: 30px;
+  color: #323232;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+.card__vendorCode {
+  font-size: 16px;
+  color: #9c9c9c;
+  padding-bottom: 23px;
+}
+.card__price {
+  font-size: 24px;
+  color: #323232;
+}
+.card__info > .btn {
+  margin-top: 34px;
+  margin-bottom: 45px;
+  padding: 23px 64px 25px 72px;
+}
+.card__aboutGoods {
+  font-size: 16px;
+  color: #323232;
+  line-height: 1.3;
+}
+
 .people-name {
   font-size: 24px;
   color: #f54f4f;
@@ -416,7 +606,7 @@ footer {
 
 .subscribe {
   position: relative;
-  margin-top: 300px;
+  margin-top: 230px;
   height: 492px;
 }
 .subscribe__text {
@@ -442,9 +632,9 @@ footer {
   margin-bottom: 40px;
 }
 .subscribe img {
-  position: relative;
+  position: absolute;
   top: -150px;
-  left: -405px;
+  left: -412px;
   z-index: 1;
 }
 
@@ -467,7 +657,7 @@ footer {
 .banner__img {
   position: absolute;
   top: -180px;
-  left: -406px;
+  left: -412px;
 }
 
 .invisible {

@@ -1,0 +1,36 @@
+.subscribe-card
+  z-index: 100
+  position: fixed
+  left: 33%
+  top: 16%
+  background-color: white
+  &__text
+    color: $black
+    padding-left: 76px
+    &:nth-child(3)
+      font-size: $category
+      font-weight: bold
+      padding-top: 48px
+      padding-bottom: 24px
+    &:nth-child(4)
+      font-size: $price
+  & form
+    padding-bottom: 69px
+    & > input
+      padding: 24px 9px 24px 28px
+      border: 1px solid $gray
+      outline: none
+      font-size: $little_text + 2px
+      color: $gray
+      margin-left: 76px
+    & > .btn
+      padding: 24px 49px 24px 50px
+      margin-left: 26px
+      margin-top: 29px
+  & > .close
+    position: absolute
+    width: 36px
+    height: 36px
+    right: 25px
+    top: 25px
+    cursor: pointer
