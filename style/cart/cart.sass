@@ -1,0 +1,31 @@
+.cart
+  z-index: 100
+  position: fixed
+  margin: 0 480px
+  width: 800px
+  top: 20%
+  background-color: white
+  padding: 55px 65px
+  & h1
+    font-size: $category
+    color: $black
+    padding-bottom: 49px
+  &>.close
+    position: absolute
+    top: 30px
+    right: 25px
+    cursor: pointer
+  & p
+    font-size: $price
+    color: $black
+    padding: 42px 0
+  & button
+    padding: 24px 70px
+    border: 1px solid $pink
+    background-color: $pink
+    color: white
+    font-size: $little_text + 2px
+    outline: none
+    &:hover
+      box-shadow: 0 4px 10px rgba(245, 79, 79, 0.44)
+      cursor: pointer

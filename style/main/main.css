@@ -99,6 +99,44 @@
   line-height: 1.3;
 }
 
+.cart {
+  z-index: 100;
+  position: fixed;
+  margin: 0 480px;
+  width: 800px;
+  top: 20%;
+  background-color: white;
+  padding: 55px 65px;
+}
+.cart h1 {
+  font-size: 30px;
+  color: #323232;
+  padding-bottom: 49px;
+}
+.cart > .close {
+  position: absolute;
+  top: 30px;
+  right: 25px;
+  cursor: pointer;
+}
+.cart p {
+  font-size: 20px;
+  color: #323232;
+  padding: 42px 0;
+}
+.cart button {
+  padding: 24px 70px;
+  border: 1px solid #f54f4f;
+  background-color: #f54f4f;
+  color: white;
+  font-size: 18px;
+  outline: none;
+}
+.cart button:hover {
+  box-shadow: 0 4px 10px rgba(245, 79, 79, 0.44);
+  cursor: pointer;
+}
+
 .people-name {
   font-size: 24px;
   color: #f54f4f;
@@ -514,6 +552,44 @@ footer {
   font-size: 16px;
   color: #323232;
   line-height: 1.3;
+}
+
+.cart {
+  z-index: 100;
+  position: fixed;
+  margin: 0 480px;
+  width: 800px;
+  top: 20%;
+  background-color: white;
+  padding: 55px 65px;
+}
+.cart h1 {
+  font-size: 30px;
+  color: #323232;
+  padding-bottom: 49px;
+}
+.cart > .close {
+  position: absolute;
+  top: 30px;
+  right: 25px;
+  cursor: pointer;
+}
+.cart p {
+  font-size: 20px;
+  color: #323232;
+  padding: 42px 0;
+}
+.cart button {
+  padding: 24px 70px;
+  border: 1px solid #f54f4f;
+  background-color: #f54f4f;
+  color: white;
+  font-size: 18px;
+  outline: none;
+}
+.cart button:hover {
+  box-shadow: 0 4px 10px rgba(245, 79, 79, 0.44);
+  cursor: pointer;
 }
 
 .people-name {
