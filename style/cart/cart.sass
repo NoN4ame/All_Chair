@@ -10,6 +10,7 @@
     font-size: $category
     color: $black
     padding-bottom: 49px
+    border-bottom: 1px solid $gray
   &>.close
     position: absolute
     top: 30px
@@ -30,11 +31,11 @@
       box-shadow: 0 4px 10px rgba(245, 79, 79, 0.44)
       cursor: pointer
 .cart-item
-  display: flex
+  display: grid
+  grid-template-columns: 104px 211px 195px 95px 110px 84px
   padding-top: 28px
   & ul
     list-style-type: none
-    padding-right: 77px
   &__name
     padding-top: 20px
     padding-bottom: 4px
@@ -47,33 +48,85 @@
   &__quantity
     display: flex
     padding-top: 22px
-    padding-right: 210px
     & #plus,#minus
       border-radius: 1000px
       border: 1px solid $gray
       color: $gray
-      font-size: $little_text + 1px
-      width: 22px
+      font-size: $price
       height: 22px
-      text-align: center
+      width: 22px
+      text-align: center !important
     &>.quantity-result
       padding: 0 12px
       color: $black
       font-size: $price
+  & #plus, #minus, .cart-item__delete > p
+    &:hover
+      border-color: $black
+      color: $black
+      cursor: pointer
   &__price
     font-size: $project_name
     color: $black
     padding-top: 19px
-    padding-right: 95.5px
-    font-weight: bold
+    font-weight: 500
     white-space: nowrap
+    text-align: right
   &__delete
-    width: 26px
-    height: 26px
-    padding-top: 21px
-    cursor: pointer
-
+    padding-top: 19px
+    text-align: -webkit-right !important
+    &>p
+      border-radius: 50%
+      border: 1px solid $gray
+      cursor: pointer
+      font-size: 24px
+      text-align: center
+      width: 26px
+      height: 26px
+      line-height: 27px
+      transform: rotate(45deg)
+      color: $gray
+  & span
+    text-align: right
 .item-img
-  padding-right: 25px
   width: 79px
   height: 91px
+.cart-bottom
+  display: flex
+  justify-content: space-between
+  border-top: 1px solid $gray
+  margin-top: 31px
+.promo-code
+  & input
+    border: 1px solid $gray
+    padding: 14px 0 14px 21px
+    outline: none
+    font-size: $price
+    color: $gray
+.result
+  &:last-child
+    padding-left: 0
+  & > section
+    padding-left: 197px
+    display: grid
+    grid-template-columns: 140px 150px
+    &:first-child
+      padding-bottom: 10px
+    &:nth-child(-n+2)
+      color: $gray
+      font-size: $price
+    &:nth-child(3)
+      padding-top: 49px
+      padding-bottom: 22px
+    &:nth-child(3), .total-price
+      color: $black!important
+      font-size: $project_name!important
+      font-weight: bold!important
+    & .sales-result, .promo-code-result, .total-price
+      color: $gray
+      font-size: $price
+      text-align: right
+#minus
+  line-height: 20px
+.promo-code, .result
+  margin-top: 44px

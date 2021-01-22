@@ -7,7 +7,6 @@ document.getElementById('cart').addEventListener('click', () => {
                     <div class="cart">
                     <h1>КОРЗИНА</h1>
                     <img class="close" src="../img/other/close.svg" alt="close">
-                    <hr>
                   </div>
             </div>`)
     // Проверяем, если корзина пуста, то выводим пустой шаблон
@@ -29,15 +28,14 @@ document.getElementById('cart').addEventListener('click', () => {
         this.styleCard()
         this.triggers()
         document.querySelector('.cart').insertAdjacentHTML('beforeend',
-            `<hr>
-            <div>
+            `<div class="cart-bottom">
                 <section class="promo-code">
                     <input type="text" placeholder="Промокод">
                 </section>
                 <section class="result">
-                    <section><p>Скидка: <p class="sales"></p></p></section>
-                    <section><p>Промокод: <p class="promo-code-result"></p></p></section>
-                    <section><p>К ОПЛАТЕ: <p class="total-price"></p></p></section>
+                    <section><p>Скидка: <p class="sales-result">-1450&#8381;</p></p></section>
+                    <section><p>Промокод: <p class="promo-code-result">-350&#8381;</p></p></section>
+                    <section><p>К ОПЛАТЕ: <p class="total-price">1100&#8381;</p></p></section>
                     <button>ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button>
                 </section>
             </div>
@@ -53,13 +51,14 @@ let cartItems = (img, name, vendorCode, price) => {
                     <li class="cart-item__vendorCode">${vendorCode}</li>
                 </ul>
                <section class="cart-item__quantity">
-                    <span id="plus">+</span>
-                    <p class="quantity-result">1</p>
                     <span id="minus">-</span>
+                    <p class="quantity-result">1</p>
+                    <span id="plus">+</span>
                </section>
+               <section class="sales"></section>
                <p class="cart-item__price">${price}</p>
-               <span>
-                     <img class="cart-item__delete" src="../img/other/del_product.svg" alt="del">
+               <span class="cart-item__delete">
+                <p>+</p>
                </span>
            </div>`
 }
