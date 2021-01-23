@@ -103,6 +103,7 @@ const prodCard = {
                 cart.push(new Object({
                         img: imgSrc,
                         name: name,
+                        quantity: 1,
                         vendorCode: vendorCode,
                         price: price
                     })

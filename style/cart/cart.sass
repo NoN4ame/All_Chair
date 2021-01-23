@@ -30,6 +30,18 @@
     &:hover
       box-shadow: 0 4px 10px rgba(245, 79, 79, 0.44)
       cursor: pointer
+.non-hover
+  border-radius: 1000px !important
+  border: 1px solid $gray !important
+  color: $gray !important
+  font-size: $price !important
+  height: 22px !important
+  width: 22px !important
+  text-align: center !important
+  &:hover
+    border-color: $gray !important
+    color: $gray !important
+    cursor: default !important
 .cart-item
   display: grid
   grid-template-columns: 104px 211px 195px 95px 110px 84px
@@ -48,7 +60,8 @@
   &__quantity
     display: flex
     padding-top: 22px
-    & #plus,#minus
+    user-select: none
+    & .plus,.minus
       border-radius: 1000px
       border: 1px solid $gray
       color: $gray
@@ -56,15 +69,15 @@
       height: 22px
       width: 22px
       text-align: center !important
+      &:hover
+        border-color: $black
+        color: $black
+        cursor: pointer
     &>.quantity-result
       padding: 0 12px
       color: $black
       font-size: $price
-  & #plus, #minus, .cart-item__delete > p
-    &:hover
-      border-color: $black
-      color: $black
-      cursor: pointer
+      width: 12px
   &__price
     font-size: $project_name
     color: $black
@@ -126,7 +139,7 @@
       color: $gray
       font-size: $price
       text-align: right
-#minus
+.minus
   line-height: 20px
 .promo-code, .result
   margin-top: 44px

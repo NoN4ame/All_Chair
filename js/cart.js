@@ -24,9 +24,14 @@ document.getElementById('cart').addEventListener('click', () => {
         this.triggers()
         // Если корзина не пуста, то выводим товары в корзине
     } else if (cart.length > 0) {
+        // Вызов рендера с товарами из корзины
         renderCartProduct(cart)
-        this.styleCard()
-        this.triggers()
+        // Стили заднего фона при открытой корзине
+        styleCard()
+        // События по закрытию корзины
+        triggers()
+        // События для действий в корзине ( увеличить число товара, удалить товар, итоговая цена)
+        quantityTriggers ()
         document.querySelector('.cart').insertAdjacentHTML('beforeend',
             `<div class="cart-bottom">
                 <section class="promo-code">
@@ -35,25 +40,25 @@ document.getElementById('cart').addEventListener('click', () => {
                 <section class="result">
                     <section><p>Скидка: <p class="sales-result">-1450&#8381;</p></p></section>
                     <section><p>Промокод: <p class="promo-code-result">-350&#8381;</p></p></section>
-                    <section><p>К ОПЛАТЕ: <p class="total-price">1100&#8381;</p></p></section>
+                    <section><p>К ОПЛАТЕ: <p class="total-price"></p></p></section>
                     <button>ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button>
                 </section>
             </div>
         `)
     }
-
 })
-let cartItems = (img, name, vendorCode, price) => {
-   return `   <div class="cart-item">
+//Динамическая отрисовка шаблона товара в корзине, принимает из себя данные из массива
+let cartItems = (img, name, vendorCode, quantity, price) => {
+    return `   <div class="cart-item">
                <img class="item-img" src="${img}" alt="product">
                 <ul>
                     <li class="cart-item__name">${name}</li>
                     <li class="cart-item__vendorCode">${vendorCode}</li>
                 </ul>
                <section class="cart-item__quantity">
-                    <span id="minus">-</span>
-                    <p class="quantity-result">1</p>
-                    <span id="plus">+</span>
+                    <span id="minus" class="non-hover minus">-</span>
+                    <p class="quantity-result">${quantity}</p>
+                    <span id="plus" class="plus">+</span>
                </section>
                <section class="sales"></section>
                <p class="cart-item__price">${price}</p>
@@ -62,10 +67,12 @@ let cartItems = (img, name, vendorCode, price) => {
                </span>
            </div>`
 }
+// Перебор массива корзины (list - принимает в себя массив товаров),(item - перебранный массив из которого получаем данные)
 const renderCartProduct = list => {
-    const productList = list.map(item => cartItems(item.img,item.name,item.vendorCode,item.price));
+    const productList = list.map(item => cartItems(item.img, item.name, item.vendorCode, item.quantity, item.price))
     document.querySelector('.cart').insertAdjacentHTML('beforeend', productList.join(''))
 }
+// Стили заднего фона при открытой корзине
 function styleCard() {
     document.querySelector('body').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
     document.querySelector('header').style.filter = 'brightness(0.5)'
@@ -73,6 +80,8 @@ function styleCard() {
         .forEach(div => div.style.filter = 'brightness(0.5)')
     document.querySelectorAll('.container')[0].style.filter = 'none'
 }
+
+// События по закрытию корзины
 function triggers() {
     // Получаем блок обертку
     let card = document.querySelector('.invisible');
@@ -99,3 +108,6 @@ function triggers() {
         } else document.querySelector('.close').src = '../img/other/close.svg'
     })
 }
+
+// События для действий в корзине ( увеличить число товара, удалить товар, итоговая цена)
+function quantityTriggers () {}
