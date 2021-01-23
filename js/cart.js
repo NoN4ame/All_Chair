@@ -26,27 +26,32 @@ document.getElementById('cart').addEventListener('click', () => {
     } else if (cart.length > 0) {
         // Вызов рендера с товарами из корзины
         renderCartProduct(cart)
-        // Стили заднего фона при открытой корзине
-        styleCard()
-        // События по закрытию корзины
-        triggers()
-        // События для действий в корзине ( увеличить число товара, удалить товар, итоговая цена)
-        quantityTriggers ()
+        // Счетчик общей суммы
+        let sum = 0;
+        let totalSum = cart.reduce((a, b) => a + b.price, sum);
+        // Рендер нижней части корзины (Промокод, Цены)
         document.querySelector('.cart').insertAdjacentHTML('beforeend',
             `<div class="cart-bottom">
                 <section class="promo-code">
                     <input type="text" placeholder="Промокод">
                 </section>
                 <section class="result">
-                    <section><p>Скидка: <p class="sales-result">-1450&#8381;</p></p></section>
-                    <section><p>Промокод: <p class="promo-code-result">-350&#8381;</p></p></section>
-                    <section><p>К ОПЛАТЕ: <p class="total-price"></p></p></section>
+                    <section><p>Скидка: <p class="sales-result">-1450 &#8381;</p></p></section>
+                    <section><p>Промокод: <p class="promo-code-result">-350 &#8381;</p></p></section>
+                    <section><p>К ОПЛАТЕ: <p class="total-price">${totalSum.toLocaleString()} &#8381;</p></p></section>
                     <button>ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button>
                 </section>
-            </div>
-        `)
+            </div>`)
+        // Стили заднего фона при открытой корзине
+        styleCard()
+        // События по закрытию корзины
+        triggers()
+        // События для действий в корзине ( увеличить число товара, удалить товар, итоговая цена)
+        quantityTriggers()
     }
 })
+
+
 //Динамическая отрисовка шаблона товара в корзине, принимает из себя данные из массива
 let cartItems = (img, name, vendorCode, quantity, price) => {
     return `   <div class="cart-item">
@@ -56,12 +61,12 @@ let cartItems = (img, name, vendorCode, quantity, price) => {
                     <li class="cart-item__vendorCode">${vendorCode}</li>
                 </ul>
                <section class="cart-item__quantity">
-                    <span id="minus" class="non-hover minus">-</span>
+                    <span class="non-hover minus">-</span>
                     <p class="quantity-result">${quantity}</p>
-                    <span id="plus" class="plus">+</span>
+                    <span class="plus">+</span>
                </section>
                <section class="sales"></section>
-               <p class="cart-item__price">${price}</p>
+               <p class="cart-item__price">${price.toLocaleString()} &#8381;</p>
                <span class="cart-item__delete">
                 <p>+</p>
                </span>
@@ -72,6 +77,7 @@ const renderCartProduct = list => {
     const productList = list.map(item => cartItems(item.img, item.name, item.vendorCode, item.quantity, item.price))
     document.querySelector('.cart').insertAdjacentHTML('beforeend', productList.join(''))
 }
+
 // Стили заднего фона при открытой корзине
 function styleCard() {
     document.querySelector('body').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
@@ -110,4 +116,9 @@ function triggers() {
 }
 
 // События для действий в корзине ( увеличить число товара, удалить товар, итоговая цена)
-function quantityTriggers () {}
+function quantityTriggers() {
+    let plus = document.querySelectorAll('.plus'),
+        minus = document.querySelectorAll('.minus'),
+        quantity = document.querySelectorAll('.quantity-result')
+
+}
