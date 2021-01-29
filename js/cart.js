@@ -53,17 +53,17 @@ document.getElementById('cart').addEventListener('click', () => {
 
 
 //Динамическая отрисовка шаблона товара в корзине, принимает из себя данные из массива
-let cartItems = (img, name, vendorCode, quantity, price) => {
-    return `   <div class="cart-item">
+let cartItems = (id, img, name, vendorCode, quantity, price) => {
+    return `   <div id="cart-item_${id}" class="cart-item">
                <img class="item-img" src="${img}" alt="product">
                 <ul>
                     <li class="cart-item__name">${name}</li>
                     <li class="cart-item__vendorCode">${vendorCode}</li>
                 </ul>
                <section class="cart-item__quantity">
-                    <span class="non-hover minus">-</span>
-                    <p class="quantity-result">${quantity}</p>
-                    <span class="plus">+</span>
+                    <span id="minus_${id}" class="non-hover minus">-</span>
+                    <p id="quantity_${id}" class="quantity-result">${quantity}</p>
+                    <span id="plus_${id}" class="plus">+</span>
                </section>
                <section class="sales"></section>
                <p class="cart-item__price">${price.toLocaleString()} &#8381;</p>
@@ -74,7 +74,7 @@ let cartItems = (img, name, vendorCode, quantity, price) => {
 }
 // Перебор массива корзины (list - принимает в себя массив товаров),(item - перебранный массив из которого получаем данные)
 const renderCartProduct = list => {
-    const productList = list.map(item => cartItems(item.img, item.name, item.vendorCode, item.quantity, item.price))
+    const productList = list.map(item => cartItems(item.id, item.img, item.name, item.vendorCode, item.quantity, item.price))
     document.querySelector('.cart').insertAdjacentHTML('beforeend', productList.join(''))
 }
 
@@ -117,8 +117,26 @@ function triggers() {
 
 // События для действий в корзине ( увеличить число товара, удалить товар, итоговая цена)
 function quantityTriggers() {
-    let plus = document.querySelectorAll('.plus'),
-        minus = document.querySelectorAll('.minus'),
-        quantity = document.querySelectorAll('.quantity-result')
+    let indexProd = cart.map(list => list.id),
 
+        cartItem = document.querySelectorAll('.cart-item')
+        for (let i = 0; i < cartItem.length; i++) {
+            let quantityInArray = cart.find(list => list.quantity),
+                testId = document.getElementById(`cart-item_${[i+1]}`)
+            testId.addEventListener('click', function (e) {
+                let minus = document.getElementById(`minus_${i+1}`),
+                    plus = document.getElementById(`plus_${i + 1}`),
+                    quantity = document.getElementById(`quantity_${i+1}`),
+                    quantityValue = parseInt(quantity.textContent)
+                if (e.target === plus) {
+                    quantityValue++
+                    quantity.innerText = String(quantityValue)
+                } quantityInArray.quantity = quantityValue
+                console.log(cart);
+            })
+        }
 }
+
+
+
+

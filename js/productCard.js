@@ -101,6 +101,7 @@ const prodCard = {
                 let vendorCode = document.querySelector('.card__vendorCode').textContent;
                 // Создаем объект который добавляем в массив корзины
                 cart.push(new Object({
+                        id: cart.length + 1,
                         img: imgSrc,
                         name: name,
                         quantity: 1,
