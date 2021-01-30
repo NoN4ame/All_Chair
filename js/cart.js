@@ -47,10 +47,9 @@ document.getElementById('cart').addEventListener('click', () => {
         // События по закрытию корзины
         triggers()
         // События для действий в корзине ( увеличить число товара, удалить товар, итоговая цена)
-        quantityTriggers()
+
     }
 })
-
 
 //Динамическая отрисовка шаблона товара в корзине, принимает из себя данные из массива
 let cartItems = (id, img, name, vendorCode, quantity, price) => {
@@ -89,6 +88,7 @@ function styleCard() {
 
 // События по закрытию корзины
 function triggers() {
+    quantityTriggers()
     // Получаем блок обертку
     let card = document.querySelector('.invisible');
     // Вешаем на него обработчик событий
@@ -114,27 +114,42 @@ function triggers() {
         } else document.querySelector('.close').src = '../img/other/close.svg'
     })
 }
-
 // События для действий в корзине ( увеличить число товара, удалить товар, итоговая цена)
 function quantityTriggers() {
-    let indexProd = cart.map(list => list.id),
+    for (let i = 0; i < cart.length; i++){
+        console.log(cart[i])
+        cart[i].id
+        let cartItem = document.querySelectorAll('.cart-item');
+        for (let g = 0; g < cartItem.length; g++) {
+            cartItem[g].addEventListener('click', (e) => {
+                if (e.target === document.querySelector('.plus')) {
+                    console.log(cart[i].id)
 
-        cartItem = document.querySelectorAll('.cart-item')
-        for (let i = 0; i < cartItem.length; i++) {
-            let quantityInArray = cart.find(list => list.quantity),
-                testId = document.getElementById(`cart-item_${[i+1]}`)
-            testId.addEventListener('click', function (e) {
-                let minus = document.getElementById(`minus_${i+1}`),
-                    plus = document.getElementById(`plus_${i + 1}`),
-                    quantity = document.getElementById(`quantity_${i+1}`),
-                    quantityValue = parseInt(quantity.textContent)
-                if (e.target === plus) {
-                    quantityValue++
-                    quantity.innerText = String(quantityValue)
-                } quantityInArray.quantity = quantityValue
-                console.log(cart);
+                }
             })
         }
+
+
+
+
+    }
+
+    //cartItem = document.querySelectorAll('.cart-item')
+        //for (let i = 0; i < cartItem.length; i++) {
+        //    let quantityInArray = cart.find(list => list.quantity),
+        //        testId = document.getElementById(`cart-item_${[i+1]}`)
+        //    testId.addEventListener('click', function (e) {
+        //        let minus = document.getElementById(`minus_${i+1}`),
+        //            plus = document.getElementById(`plus_${i + 1}`),
+        //            quantity = document.getElementById(`quantity_${i+1}`),
+        //            quantityValue = parseInt(quantity.textContent)
+        //        if (e.target === plus) {
+        //            quantityValue++
+        //            quantity.innerText = String(quantityValue)
+        //        } quantityInArray.quantity = quantityValue
+        //        console.log(cart);
+        //    })
+        //}
 }
 
 
