@@ -25,10 +25,10 @@ document.getElementById('cart').addEventListener('click', () => {
         // Если корзина не пуста, то выводим товары в корзине
     } else if (cart.length > 0) {
         // Вызов рендера с товарами из корзины
-        renderCartProduct(cart)
+        renderCartItem()
         // Счетчик общей суммы
         let sum = 0;
-        let totalSum = cart.reduce((a, b) => a + b.price, sum);
+        let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
         // Рендер нижней части корзины (Промокод, Цены)
         document.querySelector('.cart').insertAdjacentHTML('beforeend',
             `<div class="cart-bottom">
@@ -47,36 +47,32 @@ document.getElementById('cart').addEventListener('click', () => {
         // События по закрытию корзины
         triggers()
         // События для действий в корзине ( увеличить число товара, удалить товар, итоговая цена)
-
+        quantityTriggers()
     }
 })
-
-//Динамическая отрисовка шаблона товара в корзине, принимает из себя данные из массива
-let cartItems = (id, img, name, vendorCode, quantity, price) => {
-    return `   <div id="cart-item_${id}" class="cart-item">
-               <img class="item-img" src="${img}" alt="product">
+const renderCartItem = () => {
+    for (let i = 0; i < cart.length; i++) {
+        document.querySelector('.cart').insertAdjacentHTML('beforeend',
+            `<div class="cart-item">
+               <img class="item-img" src="${cart[i].img}" alt="product">
                 <ul>
-                    <li class="cart-item__name">${name}</li>
-                    <li class="cart-item__vendorCode">${vendorCode}</li>
+                    <li class="cart-item__name">${cart[i].name}</li>
+                    <li class="cart-item__vendorCode">${cart[i].vendorCode}</li>
                 </ul>
                <section class="cart-item__quantity">
-                    <span id="minus_${id}" class="non-hover minus">-</span>
-                    <p id="quantity_${id}" class="quantity-result">${quantity}</p>
-                    <span id="plus_${id}" class="plus">+</span>
+                    <span  class="minus non-hover">-</span>
+                    <p  class="quantity-result">${cart[i].quantity}</p>
+                    <span class="plus">+</span>
                </section>
                <section class="sales"></section>
-               <p class="cart-item__price">${price.toLocaleString()} &#8381;</p>
+               <p class="cart-item__price">${(cart[i].price).toLocaleString()} &#8381;</p>
                <span class="cart-item__delete">
                 <p>+</p>
                </span>
-           </div>`
+           </div>`)
+    }
 }
-// Перебор массива корзины (list - принимает в себя массив товаров),(item - перебранный массив из которого получаем данные)
-const renderCartProduct = list => {
-    const productList = list.map(item => cartItems(item.id, item.img, item.name, item.vendorCode, item.quantity, item.price))
-    document.querySelector('.cart').insertAdjacentHTML('beforeend', productList.join(''))
-}
-
+//Динамическая отрисовка шаблона товара в корзине, принимает из себя данные из массива
 // Стили заднего фона при открытой корзине
 function styleCard() {
     document.querySelector('body').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
@@ -88,7 +84,7 @@ function styleCard() {
 
 // События по закрытию корзины
 function triggers() {
-    quantityTriggers()
+
     // Получаем блок обертку
     let card = document.querySelector('.invisible');
     // Вешаем на него обработчик событий
@@ -114,43 +110,38 @@ function triggers() {
         } else document.querySelector('.close').src = '../img/other/close.svg'
     })
 }
-// События для действий в корзине ( увеличить число товара, удалить товар, итоговая цена)
+
 function quantityTriggers() {
-    for (let i = 0; i < cart.length; i++){
-        console.log(cart[i])
-        cart[i].id
-        let cartItem = document.querySelectorAll('.cart-item');
-        for (let g = 0; g < cartItem.length; g++) {
-            cartItem[g].addEventListener('click', (e) => {
-                if (e.target === document.querySelector('.plus')) {
-                    console.log(cart[i].id)
+    let cartItem = document.querySelectorAll('.cart-item')
+    for (let j = 0; j < cartItem.length; j++) {
+        let minus = document.querySelectorAll('.minus')
+        let plus = document.querySelectorAll('.plus')
+        cartItem[j].addEventListener('click', (e) => {
+            if (e.target === plus[j] && cart[j].quantity < 4) {
+                cart[j].quantity++
+                // Общая стоимость товара
+                cart[j].totalPrice = cart[j].quantity * cart[j].price
+                let sum = 0;
+                let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
+                document.querySelectorAll('.quantity-result')[j].innerHTML = cart[j].quantity
+                document.querySelector('.total-price').innerHTML = `${totalSum.toLocaleString()} &#8381;`
+            } else if (e.target === minus[j] && cart[j].quantity > 1) {
+                cart[j].quantity--
+                cart[j].totalPrice = cart[j].quantity * cart[j].price
+                let sum = 0;
+                let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
+                document.querySelectorAll('.quantity-result')[j].innerHTML = cart[j].quantity
+                document.querySelector('.total-price').innerHTML = `${totalSum.toLocaleString()} &#8381;`
+            }
 
-                }
-            })
-        }
-
-
-
-
+        })
     }
-
-    //cartItem = document.querySelectorAll('.cart-item')
-        //for (let i = 0; i < cartItem.length; i++) {
-        //    let quantityInArray = cart.find(list => list.quantity),
-        //        testId = document.getElementById(`cart-item_${[i+1]}`)
-        //    testId.addEventListener('click', function (e) {
-        //        let minus = document.getElementById(`minus_${i+1}`),
-        //            plus = document.getElementById(`plus_${i + 1}`),
-        //            quantity = document.getElementById(`quantity_${i+1}`),
-        //            quantityValue = parseInt(quantity.textContent)
-        //        if (e.target === plus) {
-        //            quantityValue++
-        //            quantity.innerText = String(quantityValue)
-        //        } quantityInArray.quantity = quantityValue
-        //        console.log(cart);
-        //    })
-        //}
 }
+
+// События для действий в корзине ( увеличить число товара, удалить товар, итоговая цена)
+
+
+
 
 
 

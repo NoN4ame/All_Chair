@@ -106,7 +106,8 @@ const prodCard = {
                         name: name,
                         quantity: 1,
                         vendorCode: vendorCode,
-                        price: parseInt(price.replace(/\s/g, ''))
+                        price: parseInt(price.replace(/\s/g, '')),
+                        totalPrice: parseInt(price.replace(/\s/g, ''))
                     })
                 )
                 // Если в корзину добавляется первый товар, то создаем счетчик товаров в корзине
