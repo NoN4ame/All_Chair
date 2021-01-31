@@ -209,7 +209,7 @@
   padding-top: 19px;
   text-align: -webkit-right !important;
 }
-.cart-item__delete > p {
+.cart-item__delete > .delete {
   border-radius: 50%;
   border: 1px solid #c4c4c4;
   cursor: pointer;
