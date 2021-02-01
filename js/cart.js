@@ -1,4 +1,5 @@
 const cart = [];
+const promo = ['2021'];
 // Вешаем обработчик на элемент "Корзина"
 document.getElementById('cart').addEventListener('click', () => {
     // При клике создаем шаблон для корзины
@@ -26,7 +27,6 @@ document.getElementById('cart').addEventListener('click', () => {
     } else if (cart.length > 0) {
         // Вызов рендера с товарами из корзины
         renderCartItem()
-        removeItem()
         // Счетчик общей суммы
         let sum = 0;
         let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
@@ -34,11 +34,11 @@ document.getElementById('cart').addEventListener('click', () => {
         document.querySelector('.cart').insertAdjacentHTML('beforeend',
             `<div class="cart-bottom">
                 <section class="promo-code">
-                    <input type="text" placeholder="Промокод">
+                    <input id="promoCodeValue" type="text" placeholder="Промокод" value="">
                 </section>
                 <section class="result">
-                    <section><p>Скидка: <p class="sales-result">-1450 &#8381;</p></p></section>
-                    <section><p>Промокод: <p class="promo-code-result">-350 &#8381;</p></p></section>
+                    <section><p>Скидка: <p class="sales-result"></p></p></section>
+                    <section><p>Промокод: <p class="promo-code-result"></p></p></section>
                     <section><p>К ОПЛАТЕ: <p class="total-price">${totalSum.toLocaleString()} &#8381;</p></p></section>
                     <button>ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button>
                 </section>
@@ -49,6 +49,7 @@ document.getElementById('cart').addEventListener('click', () => {
         triggers()
         // События для действий в корзине ( увеличить число товара, удалить товар, итоговая цена)
         quantityTriggers()
+        removeItem()
     }
 })
 const renderCartItem = () => {
@@ -68,12 +69,11 @@ const renderCartItem = () => {
                <section class="sales"></section>
                <p class="cart-item__price">${(cart[i].price).toLocaleString()} &#8381;</p>
                <span class="cart-item__delete">
-                <p class="delete">+</p>
+                <p><span class="delete">+</span></p>
                </span>
            </div>`)
     }
 }
-//Динамическая отрисовка шаблона товара в корзине, принимает из себя данные из массива
 // Стили заднего фона при открытой корзине
 function styleCard() {
     document.querySelector('body').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
@@ -110,9 +110,13 @@ function triggers() {
         } else document.querySelector('.close').src = '../img/other/close.svg'
     })
 }
+
+// Увеличение кол-ва товаров и подсчет общей суммы
 function quantityTriggers() {
     let cartItem = document.querySelectorAll('.cart-item')
+    // Перебор всех товаров в корзине
     for (let j = 0; j < cartItem.length; j++) {
+        // Кнопки
         let minus = document.querySelectorAll('.minus')
         let plus = document.querySelectorAll('.plus')
         cartItem[j].addEventListener('click', (e) => {
@@ -135,41 +139,83 @@ function quantityTriggers() {
         })
     }
 }
-function removeItem () {
+// Удаление товаров
+function removeItem() {
     let cartItem = document.querySelectorAll('.cart-item')
     let remove = document.querySelectorAll('.delete')
-    console.log(cart);
     for (let i = 0; i < cartItem.length; i++) {
         cartItem[i].addEventListener('click', (e) => {
-
-            if(e.target === remove[i] ) {
-                cartItem[i].remove()
-                console.log(cart);
-                cart.splice([i],1)
-                console.log(cart.splice([i], 1));
-                let quantity = document.querySelector('.quantity');
-                quantity.innerHTML = cart.length
-                let sum = 0;
-                let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
-                document.querySelector('.total-price').innerHTML = `${totalSum.toLocaleString()} &#8381;`
-                if (cart.length === 0 ){
-                    cartItem[i].remove()
-                    document.querySelector('.cart-bottom').remove()
-                    document.querySelector('.quantity').remove()
-                    document.querySelector('.cart').insertAdjacentHTML('beforeend',
-                        `
-                    <p class="empty-cart">Корзина Пуста</p>
-                    <a href="../templates/catalog.html">
-                        <button>В каталог</button>
-                    </a>
-                `)
+            // При нажатии на удалить выводим плашку с вариантами
+            if (e.target === remove[i]) {
+                cartItem[i].insertAdjacentHTML('beforeend', `
+                <div class="delete-block">
+                     <div class="delete-block-filter"></div>
+                        <div class="delete-block_text">
+                            <p class="delete_submit">Удалить</p>
+                            <p class="return_inCart">Вернуть в корзину</p>
+                        </div>
+                    </div>`);
+                // Плашка с дальнейшими вариантами действий
+                let delBlock = document.querySelectorAll('.delete-block')
+                for (let j = 0; j < delBlock.length; j++) {
+                    delBlock[j].addEventListener('click', (e) => {
+                        // При нажатии на вернуть в корзину, товар возвращается
+                        if (e.target === document.querySelectorAll('.return_inCart')[j]) {
+                            document.querySelectorAll('.delete-block')[j].remove()
+                            // При нажатии на удалить удаляем товар из массива
+                        } else if (e.target === document.querySelectorAll('.delete_submit')[j]) {
+                            // Удаляем товар сначала в HTML потом в массиве
+                            cartItem[i].remove()
+                            cart.splice([j], 1)
+                            // Находим кол-во товара над вкладкой корзина и выводим оставшееся кол-во товара
+                            let quantity = document.querySelector('.quantity');
+                            quantity.innerHTML = cart.length;
+                            // После удаления пересчитываем общую сумму товаров в корзине и выводим в HTML
+                            let sum = 0;
+                            let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
+                            document.querySelector('.total-price').innerHTML = `${totalSum.toLocaleString()} &#8381;`
+                            // Если корзина пуста удаляем все элементы и выводим шаблон о том что корзина пуста
+                            if (cart.length === 0) {
+                                cartItem[i].remove()
+                                document.querySelector('.cart-bottom').remove()
+                                document.querySelector('.quantity').remove()
+                                document.querySelector('.cart').insertAdjacentHTML('beforeend',
+                                    `<p class="empty-cart">Корзина Пуста</p>
+                                          <a href="../templates/catalog.html">
+                                              <button>В каталог</button>
+                                          </a>`)
+                                return cart
+                            }
+                        }
+                    })
                 }
             }
         })
     }
 }
 
-// События для действий в корзине ( увеличить число товара, удалить товар, итоговая цена)
+// Промокод и скидка
+function promoCode() {
+    let codeValue = document.getElementById('promoCodeValue')
+    if (codeValue.value === promo[0]) {
+        let sum = 0;
+        let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
+        let discount = (totalSum * 0.2);
+        codeValue.value = promo[0]
+        document.querySelector('.promo-code-result').innerHTML = `${discount.toLocaleString()}  &#8381;`
+        document.querySelector('.total-price').innerHTML = `${totalSum - discount} &#8381; `
+    }
+    codeValue.addEventListener('keyup', () => {
+        if (codeValue.value === promo[0]) {
+            let sum = 0;
+            let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
+            let discount = (totalSum * 0.2);
+            document.querySelector('.promo-code-result').innerHTML = `${discount.toLocaleString()}  &#8381;`
+            document.querySelector('.total-price').innerHTML = `${totalSum - discount} &#8381; `
+            codeValue.innerHTML = promo[0]
+        } else return false
+    })
+}
 
 
 
