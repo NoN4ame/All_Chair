@@ -96,27 +96,7 @@ function triggers() {
     })
 }
 // Промокод и скидка
-function promoCode() {
-    let codeValue = document.getElementById('promoCodeValue')
-    if (codeValue.value === promo[0]) {
-        let sum = 0;
-        let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
-        let discount = (totalSum * 0.2);
-        codeValue.value = promo[0]
-        document.querySelector('.promo-code-result').innerHTML = `${discount.toLocaleString()}  &#8381;`
-        document.querySelector('.total-price').innerHTML = `${totalSum - discount} &#8381; `
-    }
-    codeValue.addEventListener('keyup', () => {
-        if (codeValue.value === promo[0]) {
-            let sum = 0;
-            let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
-            let discount = (totalSum * 0.2);
-            document.querySelector('.promo-code-result').innerHTML = `${discount.toLocaleString()}  &#8381;`
-            document.querySelector('.total-price').innerHTML = `${totalSum - discount} &#8381; `
-            codeValue.innerHTML = promo[0]
-        } else return false
-    })
-}
+
 
 function totalPrice() {
     // Нижняя часть корзины
@@ -140,3 +120,55 @@ function totalPrice() {
 }
 
 // НОВАЯ ВЕТКА
+function removeItem() {
+    let cartItem = document.querySelectorAll('.cart-item')
+    let remove = document.querySelectorAll('.delete')
+    for (let i = 0; i < cartItem.length; i++) {
+        cartItem[i].addEventListener('click', (e) => {
+            // При нажатии на удалить выводим плашку с вариантами
+            if (e.target === remove[i]) {
+                cartItem[i].insertAdjacentHTML('beforeend', `
+                <div class="delete-block">
+                     <div class="delete-block-filter"></div>
+                        <div class="delete-block_text">
+                            <p class="delete_submit">Удалить</p>
+                            <p class="return_inCart">Вернуть в корзину</p>
+                        </div>
+                    </div>`);
+                // Плашка с дальнейшими вариантами действий
+                let delBlock = document.querySelectorAll('.delete-block')
+                for (let j = 0; j < delBlock.length; j++) {
+                    delBlock[j].addEventListener('click', (e) => {
+                        // При нажатии на вернуть в корзину, товар возвращается
+                        if (e.target === document.querySelectorAll('.return_inCart')[j]) {
+                            document.querySelectorAll('.delete-block')[j].remove()
+                            // При нажатии на удалить удаляем товар из массива
+                        } else if (e.target === document.querySelectorAll('.delete_submit')[j]) {
+                            // Удаляем товар сначала в HTML потом в массиве
+                            cartItem[i].remove()
+                            cart.splice([j], 1)
+                            // Находим кол-во товара над вкладкой корзина и выводим оставшееся кол-во товара
+                            let quantity = document.querySelector('.quantity');
+                            quantity.innerHTML = cart.length;
+                            // После удаления пересчитываем общую сумму товаров в корзине и выводим в HTML
+                            let sum = 0;
+                            let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
+                            document.querySelector('.total-price').innerHTML = `${totalSum.toLocaleString()} &#8381;`
+                            // Если корзина пуста удаляем все элементы и выводим шаблон о том что корзина пуста
+                            if (cart.length === 0) {
+                                cartItem[i].remove()
+                                document.querySelector('.cart-bottom').remove()
+                                document.querySelector('.quantity').remove()
+                                document.querySelector('.cart').insertAdjacentHTML('beforeend',
+                                    `<p class="empty-cart">Корзина Пуста</p>
+                                          <a href="../templates/catalog.html">
+                                              <button>В каталог</button>
+                                          </a>`)
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    }
+}
