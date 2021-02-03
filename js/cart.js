@@ -18,29 +18,26 @@ document.getElementById('cart').addEventListener('click', () => {
         totalPrice()
         triggers()
     }
-quantity()
+    quantity()
 })
 const quantity = () => {
     let cartItem = document.querySelectorAll('.cart-item')
-    let plus = document.querySelectorAll('.plus')
-    let minus =document.querySelectorAll('.minus')
-    for (let i = 0; i < cartItem.length; i++) {
-        cartItem[i].addEventListener('click', (e) => {
-            console.log(e.target)
-            console.log(cart[i].id);
-            if (e.target === plus[i] && cart[i].quantity < 4){
+    let minus = document.querySelectorAll('.minus')
+    cartItem.forEach(el => el.addEventListener('click', e => {
+        let plus = el.querySelector('.plus');
+        let minus = el.querySelector('.minus');
+        for (let i = 0; i < cart.length; i++) {
+            if (e.target === plus && cart[i].quantity < 4) {
                 cart[i].quantity++
-                console.log(cart[i].quantity)
-            } else if (e.target === minus[i] && cart[i].quantity >= 1){
+                console.log(cart[i].quantity);
+            } else if (e.target === el.querySelector('.minus') && cart[i].quantity >= 1) {
                 cart[i].quantity--
-                if (cart[i].quantity === 0) {
-                    cartItem[i].remove()
-                    cart.splice([i],1)
-                    console.log([i].length);
-                }
+            } else if (cart[i].quantity === 0) {
+                cart.splice([i],1)
+                el.remove()
             }
-        })
-    }
+        }
+    }))
 }
 quantity()
 // Отрисовка шаблона
@@ -73,6 +70,7 @@ const emptyCart = () => {
                                               <button>В каталог</button>
                                           </a>`)
 }
+
 // Общая сумма
 function totalPrice() {
     // Нижняя часть корзины
