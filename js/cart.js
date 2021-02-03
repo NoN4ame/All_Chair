@@ -26,20 +26,26 @@ const quantity = () => {
     cartItem.forEach(el => el.addEventListener('click', e => {
         let plus = el.querySelector('.plus');
         let minus = el.querySelector('.minus');
-        for (let i = 0; i < cart.length; i++) {
-            if (e.target === plus && cart[i].quantity < 4) {
-                cart[i].quantity++
-                console.log(cart[i].quantity);
-            } else if (e.target === el.querySelector('.minus') && cart[i].quantity >= 1) {
-                cart[i].quantity--
-            } else if (cart[i].quantity === 0) {
-                cart.splice([i],1)
-                el.remove()
+        let quantity = parseInt(el.querySelector('.quantity-result').textContent)
+        let find = cart.find(item => item.name === el.querySelector('.cart-item__name').textContent);
+        if (e.target === plus && find.quantity < 4) {
+            find.quantity++
+            el.querySelector('.quantity-result').innerHTML = String(find.quantity)
+        } else if (e.target === minus && find.quantity > 1) {
+            find.quantity--
+            el.querySelector('.quantity-result').innerHTML = String(find.quantity)
+        } else if (find.quantity === 0) {
+            el.remove()
+            let index = cart.findIndex(n => n.name === el.querySelector('.cart-item__name').textContent)
+            if (index !== -1){
+                cart.splice(index,1)
             }
         }
     }))
 }
-quantity()
+const delItem = () => {
+    
+}
 // Отрисовка шаблона
 const renderCart = () => {
     for (let i = 0; i < cart.length; i++) {
@@ -55,7 +61,7 @@ const renderCart = () => {
                     <span class="plus">+</span>
                </section>
                <section class="sales"></section>
-               <p class="cart-item__price">${cart[i].price}</p>
+               <p class="cart-item__price">${(cart[i].price).toLocaleString()} &#8381;</p>
                <span class="cart-item__delete">
                <p><span class="delete">+</span></p>
                </span>
