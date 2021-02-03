@@ -13,11 +13,40 @@ document.getElementById('cart').addEventListener('click', () => {
     if (cart.length === 0) {
         emptyCart()
         triggers()
-    } else document.querySelector('.cart').insertAdjacentHTML('beforeend', renderCart)
+    } else {
+        renderCart()
+        totalPrice()
+        triggers()
+    }
+quantity()
 })
+const quantity = () => {
+    let cartItem = document.querySelectorAll('.cart-item')
+    let plus = document.querySelectorAll('.plus')
+    let minus =document.querySelectorAll('.minus')
+    for (let i = 0; i < cartItem.length; i++) {
+        cartItem[i].addEventListener('click', (e) => {
+            console.log(e.target)
+            console.log(cart[i].id);
+            if (e.target === plus[i] && cart[i].quantity < 4){
+                cart[i].quantity++
+                console.log(cart[i].quantity)
+            } else if (e.target === minus[i] && cart[i].quantity >= 1){
+                cart[i].quantity--
+                if (cart[i].quantity === 0) {
+                    cartItem[i].remove()
+                    cart.splice([i],1)
+                    console.log([i].length);
+                }
+            }
+        })
+    }
+}
+quantity()
+// Отрисовка шаблона
 const renderCart = () => {
     for (let i = 0; i < cart.length; i++) {
-        `<div class="cart-item">
+        document.querySelector('.cart').insertAdjacentHTML("beforeend", `<div class="cart-item">
                <img class="item-img" src="${cart[i].img}" alt="product">
                 <ul>
                     <li class="cart-item__name">${cart[i].name}</li>
@@ -33,7 +62,7 @@ const renderCart = () => {
                <span class="cart-item__delete">
                <p><span class="delete">+</span></p>
                </span>
-               </div>`
+               </div>`)
     }
 }
 // Корзина пуста
@@ -44,7 +73,26 @@ const emptyCart = () => {
                                               <button>В каталог</button>
                                           </a>`)
 }
-
+// Общая сумма
+function totalPrice() {
+    // Нижняя часть корзины
+    let sum = 0;
+    let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
+    // Рендер нижней части корзины (Промокод, Цены)
+    document.querySelector('.cart').insertAdjacentHTML('beforeend',
+        `<div class="cart-bottom">
+                <section class="promo-code">
+                    <input id="promoCodeValue" type="text" placeholder="Промокод" value="">
+                </section>
+                <section class="result">
+                    <section><p>Скидка: <p class="sales-result"></p></p></section>
+                    <section><p>Промокод: <p class="promo-code-result"></p></p></section>
+                    <section><p>К ОПЛАТЕ: <p class="total-price">${totalSum.toLocaleString()} &#8381;</p></p></section>
+                    <button>ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button>
+                </section>
+            </div>`)
+    // Вызов метода, промокода и скидок
+}
 
 function styleCard() {
     document.querySelector('body').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
