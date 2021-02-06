@@ -1,33 +1,35 @@
 const cart = [];
 const promo = ['2021', '2020'];
 // Вешаем обработчик на элемент "Корзина"
-document.getElementById('cart').addEventListener('click', () => {
+
+document.getElementById('cart').addEventListener('click', cartInit)
     // При клике создаем шаблон для корзины
-    document.querySelector('main').insertAdjacentHTML('beforeend',
-        `<div class="invisible">
+    function cartInit() {
+        document.querySelector('main').insertAdjacentHTML('beforeend',
+            `<div class="invisible">
                     <div class="cart">
                     <h1>КОРЗИНА</h1>
                     <img class="close" src="../img/other/close.svg" alt="close">
                   </div>
             </div>`)
-    if (cart.length === 0) {
-        emptyCart()
-        triggers()
-    } else {
-        renderCart()
-        triggers()
-        cartBottom()
+        if (cart.length === 0) {
+            emptyCart()
+            triggers()
+        } else {
+            renderCart()
+            triggers()
+            cartBottom()
+        }
+        quantity()
+        delChoice()
     }
-    quantity()
-    delChoice()
-})
 // Подсчет кол-ва товаров и вывод суммы с учетом кол-ва
 const quantity = () => {
     let cartItem = document.querySelectorAll('.cart-item')
     cartItem.forEach(el => el.addEventListener('click', (e) => {
         let plus = el.querySelector('.plus');
         let minus = el.querySelector('.minus');
-        let find = cart.find(item => item.name === el.querySelector('.cart-item__name').textContent);
+        let find = cart.find(item => item.vendorCode === el.querySelector('.cart-item__vendorCode').textContent);
         if (e.target === plus && find.quantity < 4) {
             find.quantity++
             find.totalPrice = find.price * find.quantity
@@ -78,7 +80,7 @@ const delItem = (cartItem) => {
             // Удаляем товар сначала HTML
             cartItem.remove()
             // Находим совпадение по имени товара в массиве
-            let index = cart.findIndex(n => n.name === cartItem.querySelector('.cart-item__name').textContent)
+            let index = cart.findIndex(n => n.vendorCode === cartItem.querySelector('.cart-item__vendorCode').textContent)
             if (index !== -1) {
                 // Если нашли, то удаляем
                 cart.splice(index, 1)

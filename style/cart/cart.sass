@@ -31,6 +31,28 @@
     &:hover
       box-shadow: 0 4px 10px rgba(245, 79, 79, 0.44)
       cursor: pointer
+  &__itemAdded
+    display: flex
+    align-items: center
+    margin: 42px 0 55px 0
+    &>p:nth-child(2)
+      font-size: $price - 2px
+      font-weight: bold
+      color: #6BD69C
+      padding-left: 14px
+      padding-right: 40px
+    &>p:nth-child(3)
+      font-size: $little_text - 2px
+      width: 140px
+      cursor: default
+      &>span
+        color: $pink
+        border-bottom: 1px solid
+        cursor: pointer
+    &>img
+      width: 22px!important
+      height: 22px!important
+
 .non-hover
   border-radius: 1000px !important
   border: 1px solid $gray !important

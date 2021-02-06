@@ -19,17 +19,18 @@ const prodCard = {
                     // Путь до картинки
                     imgSrc = img[0].getAttribute('src')
                 // Имя продукта
-                let name = productContainer.querySelectorAll('.product__name');
+                let name = productContainer.querySelector('.product__name');
                 // Цена продукта
-                let price = productContainer.querySelectorAll('.product__price');
+                let price = productContainer.querySelector('.product__price');
+                let vendorCode = productContainer.querySelector('.product__vendorCode')
                 // Вызываем метод отрисовки карточки товара
-                this.renderCard(imgSrc, name[0].textContent, price[0].textContent)
-                this.triggers(imgSrc, name[0].textContent, price[0].textContent)
+                this.renderCard(imgSrc, name.textContent, price.textContent, vendorCode.textContent)
+                this.triggers(imgSrc, name.textContent, price.textContent, vendorCode.textContent)
             })
         }
     },
     // Метод отрисовки карточки товара
-    renderCard(imgSrc, name, price) {
+    renderCard(imgSrc, name, price, vendorCode) {
         // Ищем контейнер в который передастся карточка товара
         let cardContainer = document.querySelector('main')
         // Прописываем HTML шаблон
@@ -40,7 +41,7 @@ const prodCard = {
                         <img class="close" src="../img/other/close.svg" alt="close">
                         <div class="card__info">
                             <p class="card__name">${name}</p>
-                            <p class="card__vendorCode">Артикул: ${Math.floor(Math.random() * 10000)}</p>
+                            <p class="card__vendorCode">${vendorCode}</p>
                             <p class="card__price">${price}</p>
                             <button id="in_cart" class="btn">В корзину</button>
                             <p class="card__aboutGoods">The Series 7™ chair is an icon in modern<br>
@@ -96,7 +97,8 @@ const prodCard = {
         // Обработчик событий по добавлению товара в корзину
         card.querySelector('.card').addEventListener('click', (e) => {
             // Если клик по кнопке добавить в корзину
-            if (e.target === document.getElementById('in_cart')) {
+            let buyButton = document.getElementById('in_cart');
+            if (e.target === buyButton) {
                 // Получаем Артикул
                 let vendorCode = document.querySelector('.card__vendorCode').textContent;
                 // Создаем объект который добавляем в массив корзины
@@ -110,17 +112,30 @@ const prodCard = {
                         totalPrice: parseInt(price.replace(/\s/g, ''))
                     })
                 )
+                buyButton.remove()
+                document.querySelector('.card__aboutGoods').insertAdjacentHTML('beforebegin', `
+                            <div class="cart__itemAdded">
+                                <img src="../img/other/added.svg" alt="added">
+                                <p>В КОРЗИНЕ</p>
+                                <p>Вы можете изменить кол-во товара <span id="inCart">в корзине</span></p>
+                            </div>
+                `)
+                document.getElementById('inCart').addEventListener('click', (e) => {
+                    document.querySelector('.card').remove()
+                    document.querySelector('.invisible').remove()
+                    cartInit()
+                })
                 // Если в корзину добавляется первый товар, то создаем счетчик товаров в корзине
                 if (cart.length === 1) {
                     document.getElementById('cart').insertAdjacentHTML
-                    ('beforeend',`<span class="quantity"></span>`)
+                    ('beforeend', `<span class="quantity"></span>`)
                 }
                 // Находим элемент "счетчика"
                 let quantity = document.querySelector('.quantity');
                 // Добавляем в "счетчик" длину массива(кол-во товаров в корзине)
                 quantity.innerHTML = cart.length
                 // Если товаров 10 и больше, не много меняем css, для более корректного отображение счетчика
-                if (cart.length >= 10){
+                if (cart.length >= 10) {
                     quantity.style.padding = '2.5px 5px'
                 }
             }
