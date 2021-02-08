@@ -2,7 +2,6 @@ const prodCard = {
     // Инициализация карточки товара
     init() {
         this.productInfo()
-
     },
     // Все о товаре
     productInfo() {
@@ -26,6 +25,7 @@ const prodCard = {
                 // Вызываем метод отрисовки карточки товара
                 this.renderCard(imgSrc, name.textContent, price.textContent, vendorCode.textContent)
                 this.triggers(imgSrc, name.textContent, price.textContent, vendorCode.textContent)
+                this.productAvailability()
             })
         }
     },
@@ -112,6 +112,7 @@ const prodCard = {
                         totalPrice: parseInt(price.replace(/\s/g, ''))
                     })
                 )
+                // Меняем кнопку купить, на В корзине
                 buyButton.remove()
                 document.querySelector('.card__aboutGoods').insertAdjacentHTML('beforebegin', `
                             <div class="cart__itemAdded">
@@ -140,6 +141,25 @@ const prodCard = {
                 }
             }
         })
+    },
+    // Проверка на наличие товара в корзине
+    productAvailability() {
+        let index = cart.findIndex(n => n.vendorCode === document.querySelector('.card__vendorCode').textContent)
+        if (index !== -1){
+            document.getElementById('in_cart').remove()
+            document.querySelector('.card__aboutGoods').insertAdjacentHTML('beforebegin', `
+                            <div class="cart__itemAdded">
+                                <img src="../img/other/added.svg" alt="added">
+                                <p>В КОРЗИНЕ</p>
+                                <p>Вы можете изменить кол-во товара <span id="inCart">в корзине</span></p>
+                            </div>
+                `)
+            document.getElementById('inCart').addEventListener('click', (e) => {
+                document.querySelector('.card').remove()
+                document.querySelector('.invisible').remove()
+                cartInit()
+            })
+        }
     }
 }
 prodCard.init()

@@ -22,7 +22,32 @@ document.getElementById('cart').addEventListener('click', cartInit)
         }
         quantity()
         delChoice()
+        order()
     }
+// Отрисовка шаблона
+const renderCart = () => {
+    for (let i = 0; i < cart.length; i++) {
+        document.querySelector('.cart').insertAdjacentHTML("beforeend",
+            `<div class="cart-item">
+                    <img class="item-img" src="${cart[i].img}" alt="product">
+                        <ul>
+                            <li class="cart-item__name">${cart[i].name}</li>
+                            <li class="cart-item__vendorCode">${cart[i].vendorCode}</li>
+                        </ul>
+                    <section class="cart-item__quantity">
+                         <span class="minus">-</span>
+                         <p class="quantity-result">${cart[i].quantity}</p>
+                         <span class="plus">+</span>
+                    </section>
+                    <section class="sales"></section>
+                    <p class="cart-item__price">${(cart[i].price).toLocaleString()} &#8381;</p>
+                    <span class="cart-item__delete">
+                    <p><span class="delete">+</span></p>
+                    </span>
+               </div>`)
+    }
+    scroll ()
+}
 // Подсчет кол-ва товаров и вывод суммы с учетом кол-ва
 const quantity = () => {
     let cartItem = document.querySelectorAll('.cart-item')
@@ -100,29 +125,6 @@ const delItem = (cartItem) => {
     }))
     scroll()
 }
-// Отрисовка шаблона
-const renderCart = () => {
-    for (let i = 0; i < cart.length; i++) {
-        document.querySelector('.cart').insertAdjacentHTML("beforeend", `<div class="cart-item">
-               <img class="item-img" src="${cart[i].img}" alt="product">
-                <ul>
-                    <li class="cart-item__name">${cart[i].name}</li>
-                    <li class="cart-item__vendorCode">${cart[i].vendorCode}</li>
-                </ul>
-               <section class="cart-item__quantity">
-                    <span class="minus">-</span>
-                    <p class="quantity-result">${cart[i].quantity}</p>
-                    <span class="plus">+</span>
-               </section>
-               <section class="sales"></section>
-               <p class="cart-item__price">${(cart[i].price).toLocaleString()} &#8381;</p>
-               <span class="cart-item__delete">
-               <p><span class="delete">+</span></p>
-               </span>
-               </div>`)
-    }
-    scroll ()
-}
 // Корзина пуста
 const emptyCart = () => {
     document.querySelector('.cart').insertAdjacentHTML('beforeend',
@@ -152,7 +154,7 @@ function cartBottom() {
                     <section><p>Скидка: <p class="sales-result"></p></p></section>
                     <section><p>Промокод: <p class="promo-code-result"></p></p></section>
                     <section><p>К ОПЛАТЕ: <p class="total-price">${totalSum.toLocaleString()} &#8381;</p></p></section>
-                    <button>ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button>
+                    <button id="ordering">ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button>
                 </section>
             </div>`)
     promoCode()
@@ -222,4 +224,8 @@ function scroll () {
         document.querySelector('.cart').style.height = '775px'
         document.querySelector('.cart').style.overflowX = 'none'
     } else document.querySelector('.cart').style.height = 'auto'
+}
+// Переход на оформление заказа
+function order (){
+    ordering.init()
 }

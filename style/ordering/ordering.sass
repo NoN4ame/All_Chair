@@ -1,0 +1,94 @@
+.order
+  z-index: 100
+  position: fixed
+  margin: 0 480px
+  width: 800px
+  top: 9.6%
+  background-color: white
+  padding: 55px 65px
+  &>a
+    text-decoration: none
+    color: $black
+    font-size: $price
+    border-bottom: 1px solid
+    margin-bottom: 24px
+    &:hover
+      color: $pink
+  &>h1
+    font-size: $category
+    padding-top: 24px
+    padding-bottom: 50px
+    border-bottom: 1px solid $gray
+  &>.close
+    position: absolute
+    width: 36px
+    height: 36px
+    right: 25px
+    top: 25px
+    cursor: pointer
+  &>form
+    &>p
+      color: $pink
+      font-size: $project_name
+      font-weight: bold
+      padding-bottom: 30px
+      padding-top: 45px
+  &__content
+    display: flex
+.chooseDelivery
+  margin-bottom: 48px
+  &>ul
+    list-style-type: none
+    color: $black
+    font-size: $project_name
+    margin-right: 250px
+    &:first-child
+      padding-bottom: 19px
+    &>li:first-child
+      margin-bottom: 10px
+    &>li>label
+        padding-left: 20px
+        cursor: pointer
+        font-weight: 500
+
+.deliveryDetails
+  width: 45%
+  &>p
+    color: $black
+    font-size: $little_text
+.aboutRecipient
+  display: flex
+  margin-bottom: 77px
+  &__text
+    font-size: $project_name
+    color: $black
+    font-weight: 500
+    padding-bottom: 26px
+  &>.recipient
+    margin-right: 50px
+    &>ul
+      list-style-type: none
+      &>li>input
+        padding: 24px 0 26px 25px
+        width: 350px
+        color: $gray
+        outline: none
+        border: 1px solid $gray
+        font-size: $little_text
+        &:first-child
+          margin-bottom: 10px
+  &>.address
+    &>ul
+      list-style-type: none
+      &>li
+        margin-bottom: 10px
+        &:last-child
+          margin-bottom: 0
+        &>input
+          padding: 12px 0 12px 20px
+          width: 350px
+          color: $gray
+          outline: none
+          border: 1px solid $gray
+          font-size: $little_text
+
