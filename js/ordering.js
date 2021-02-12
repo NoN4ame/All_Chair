@@ -11,7 +11,7 @@ const ordering = {
                         <a href="#">Вернуться в корзину</a>
                         <h1>ОФОРМЛЕНИЕ ЗАКАЗА</h1>
                         <form action="#">
-                        <p>СПОСОБ ПОЛУЧЕНИЯ</p>
+                        <p class="headers">СПОСОБ ПОЛУЧЕНИЯ</p>
                             <div class="order__content">
                                 <section class="chooseDelivery">
                                 <ul>
@@ -51,30 +51,32 @@ const ordering = {
                                     </section>
                                 </div>
                                 <div class="payment">
-                                <p>СПОСОБ ОПЛАТЫ</p>
-                                <input type="radio" name="payment" id="cash" value="Наличными при получении" checked>
-                                <label for="cash">Наличными при получении</label>
-                                <input type="radio" name="payment" id="card" value="Картой">
-                                <label for="card">Картой</label>
+                                <p class="headers">СПОСОБ ОПЛАТЫ</p>
+                                <ul>
+                                <li><input type="radio" name="payment" id="cash" value="Наличными при получении" checked>
+                                <label for="cash">Наличными при получении</label></li>
+                                <li><input type="radio" name="payment" id="card" value="Картой">
+                                <label for="card">Картой</label></li>
+                                </ul>
                                 </div>
                                 <div class="totalSum">
-                                <p>К ОПЛАТЕ: 3000 р</p>
-                                <button type="submit">Оформить</button>
+                                <p>К ОПЛАТЕ: <span>3000 р</span></p>
+                                <button class="btn" type="submit">Оформить</button>
                                 </div>
                         </form>
                       </div>`)
+            this.scroll()
         })
-        scroll(document.querySelector('.order'))
     },
     delivery() {
 
     },
-    scroll () {
-    if (cart.length >= 3) {
-        item.style.overflowY = 'scroll'
-        item.style.top = '3.5%'
-        item.style.height = '775px'
-        item.style.overflowX = 'none'
-    } else item.style.height = 'auto'
-}
+    scroll() {
+        let orderBlock = document.querySelector('.order');
+        orderBlock.style.overflowY = 'scroll'
+        orderBlock.style.top = '3.5%'
+        orderBlock.style.height = '775px'
+        orderBlock.style.overflowX = 'none'
+        document.body.style.overflow = 'hidden'
+    }
 }

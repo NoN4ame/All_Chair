@@ -154,7 +154,7 @@ function cartBottom() {
                     <section><p>Скидка: <p class="sales-result"></p></p></section>
                     <section><p>Промокод: <p class="promo-code-result"></p></p></section>
                     <section><p>К ОПЛАТЕ: <p class="total-price">${totalSum.toLocaleString()} &#8381;</p></p></section>
-                    <button id="ordering">ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button>
+                    <button class="btn" id="ordering">ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button>
                 </section>
             </div>`)
     promoCode()
@@ -199,9 +199,9 @@ function triggers() {
         // Если клик был по блоку или на иконку 'X', то закрываем карточку товара
         if (e.target === document.querySelector('.close')
             || e.target === document.querySelector('.invisible')) {
-            document.querySelector('.cart').remove()
             document.querySelector('.invisible').remove()
-            document.querySelector('body').style.backgroundColor = 'transparent'
+            document.body.style.backgroundColor = 'transparent'
+            document.body.style.overflow = 'auto'
             document.querySelector('header').style.filter = 'none'
             document.querySelectorAll('.container')
                 .forEach(div => div.style.filter = 'none')
@@ -223,6 +223,7 @@ function scroll () {
         document.querySelector('.cart').style.top = '3.5%'
         document.querySelector('.cart').style.height = '775px'
         document.querySelector('.cart').style.overflowX = 'none'
+        document.body.style.overflow = 'hidden'
     } else document.querySelector('.cart').style.height = 'auto'
 }
 // Переход на оформление заказа

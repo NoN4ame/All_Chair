@@ -125,7 +125,7 @@
   font-size: 20px;
   color: #323232;
 }
-.cart button {
+.cart > .btn {
   padding: 24px 70px;
   border: 1px solid #f54f4f;
   background-color: #f54f4f;
@@ -134,7 +134,7 @@
   font-size: 18px;
   outline: none;
 }
-.cart button:hover {
+.cart > .btn:hover {
   box-shadow: 0 4px 10px rgba(245, 79, 79, 0.44);
   cursor: pointer;
 }
@@ -348,6 +348,13 @@
   cursor: pointer;
 }
 
+.headers {
+  color: #f54f4f;
+  font-size: 24px;
+  font-weight: bold;
+  padding-bottom: 30px;
+}
+
 .order {
   z-index: 100;
   position: fixed;
@@ -381,36 +388,28 @@
   top: 25px;
   cursor: pointer;
 }
-.order > form > p {
-  color: #f54f4f;
-  font-size: 24px;
-  font-weight: bold;
-  padding-bottom: 30px;
+.order > form > .headers {
   padding-top: 45px;
 }
 .order__content {
   display: flex;
-}
-
-.chooseDelivery {
   margin-bottom: 48px;
 }
+
 .chooseDelivery > ul {
   list-style-type: none;
-  color: #323232;
-  font-size: 24px;
   margin-right: 250px;
-}
-.chooseDelivery > ul:first-child {
-  padding-bottom: 19px;
 }
 .chooseDelivery > ul > li:first-child {
   margin-bottom: 10px;
 }
-.chooseDelivery > ul > li > label {
-  padding-left: 20px;
+
+label {
+  padding-left: 10px;
   cursor: pointer;
   font-weight: 500;
+  color: #323232;
+  font-size: 24px;
 }
 
 .deliveryDetails {
@@ -466,6 +465,24 @@
   font-size: 16px;
 }
 
+.payment {
+  margin-bottom: 77px;
+}
+.payment > ul {
+  list-style-type: none;
+}
+.payment > ul > li:first-child {
+  padding-bottom: 10px;
+}
+
+.totalSum {
+  font-size: 24px;
+  color: #323232;
+  font-weight: bold;
+}
+.totalSum > p > span {
+  padding-left: 42px;
+}
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   /* display: none; <- Crashes Chrome on hover */
   -webkit-appearance: none;
@@ -570,6 +587,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   border: 1px solid #f54f4f;
   outline: none;
   font-weight: bold;
+  text-transform: uppercase;
 }
 .btn:hover {
   box-shadow: 0 4px 10px rgba(245, 79, 79, 0.44);

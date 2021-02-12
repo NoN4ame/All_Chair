@@ -1,3 +1,8 @@
+.headers
+  color: $pink
+  font-size: $project_name
+  font-weight: bold
+  padding-bottom: 30px
 .order
   z-index: 100
   position: fixed
@@ -27,30 +32,23 @@
     top: 25px
     cursor: pointer
   &>form
-    &>p
-      color: $pink
-      font-size: $project_name
-      font-weight: bold
-      padding-bottom: 30px
+    &>.headers
       padding-top: 45px
   &__content
     display: flex
+    margin-bottom: 48px
 .chooseDelivery
-  margin-bottom: 48px
   &>ul
     list-style-type: none
-    color: $black
-    font-size: $project_name
     margin-right: 250px
-    &:first-child
-      padding-bottom: 19px
     &>li:first-child
       margin-bottom: 10px
-    &>li>label
-        padding-left: 20px
-        cursor: pointer
-        font-weight: 500
-
+label
+  padding-left: 10px
+  cursor: pointer
+  font-weight: 500
+  color: $black
+  font-size: $project_name
 .deliveryDetails
   width: 45%
   &>p
@@ -92,3 +90,16 @@
           border: 1px solid $gray
           font-size: $little_text
 
+.payment
+  margin-bottom: 77px
+  &>ul
+    list-style-type: none
+    &>li:first-child
+      padding-bottom: 10px
+.totalSum
+  font-size: $project_name
+  color: $black
+  font-weight: bold
+  &>p>span
+    padding-left: 42px
+  &>.btn
