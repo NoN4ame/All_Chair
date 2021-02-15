@@ -38,6 +38,7 @@
     display: flex
     margin-bottom: 48px
 .chooseDelivery
+  width: 54%
   &>ul
     list-style-type: none
     margin-right: 250px
@@ -49,10 +50,11 @@ label
   color: $black
   font-size: $project_name
 .deliveryDetails
-  width: 45%
-  &>p
+  width: 60%
+  &_text
     color: $black
     font-size: $little_text
+    line-height: 21px
 .aboutRecipient
   display: flex
   margin-bottom: 77px
@@ -88,7 +90,21 @@ label
           outline: none
           border: 1px solid $gray
           font-size: $little_text
-
+.our-address
+  &>ul>li
+    margin-bottom: 5px!important
+    &:first-child
+      display: flex
+      margin-bottom: 11px !important
+      &>p
+        padding-left: 15px !important
+        font-size: $little_text + 2px !important
+    & p
+      padding-left: 30px
+      font-size: 14px
+    &:last-child
+      margin-top: 35px
+      margin-bottom: 0
 .payment
   margin-bottom: 77px
   &>ul

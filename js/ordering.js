@@ -4,13 +4,15 @@ const ordering = {
     },
     render() {
         document.getElementById('ordering').addEventListener('click', () => {
+            //
+            let totalPrice = (document.querySelector('.total-price').textContent)
             document.querySelector('.cart').remove()
             document.querySelector('.invisible').insertAdjacentHTML('beforeend',
                 `<div class="order">
                         <img class="close" src="../img/other/close.svg" alt="">
                         <a href="#">Вернуться в корзину</a>
                         <h1>ОФОРМЛЕНИЕ ЗАКАЗА</h1>
-                        <form action="#">
+                        <form id="formResult" action="#">
                         <p class="headers">СПОСОБ ПОЛУЧЕНИЯ</p>
                             <div class="order__content">
                                 <section class="chooseDelivery">
@@ -25,11 +27,7 @@ const ordering = {
                                 </ul>
                                 </section>
                                 <section class="deliveryDetails">
-                                    <p>При оформлении Доставки для уточнения
-                                    даты и времени доставки с вами свяжется
-                                    оператор. Если в течение 1 часа вам
-                                    не перезвонили, свяжитесь с нами
-                                    по телефону +1 123 456 78 90</p>
+                                    <p class="deliveryDetails_text"></p>
                                 </section>
                             </div>
                                 <div class="aboutRecipient">
@@ -51,13 +49,14 @@ const ordering = {
                                 </ul>
                                 </div>
                                 <div class="totalSum">
-                                <p>К ОПЛАТЕ: <span>3000 р</span></p>
-                                <button class="btn" type="submit">Оформить</button>
+                                <p>К ОПЛАТЕ: <span class="total-pr">${totalPrice}</span></p>
+                                <button id="submit" class="btn">Оформить</button>
                                 </div>
                         </form>
                       </div>`)
             this.scroll()
             this.choice()
+            this.formSubm()
         })
     },
     delivery() {
@@ -65,10 +64,10 @@ const ordering = {
             `                  <section class="address">
                                     <p class="aboutRecipient__text">Адрес получателя:</p>
                                     <ul>
-                                    <li><input type="text" placeholder="Город" name="deliveryForm" id="city"></li>
-                                    <li><input type="text" placeholder="Улица" name="deliveryForm" id="street"></li>
-                                    <li><input type="text" placeholder="Дом" name="deliveryForm" id="houseNumber"></li>
-                                    <li><input type="text" placeholder="Квартира/офис" name="deliveryForm" id="apartment"></li>
+                                    <li><input type="text" placeholder="Город" name="deliveryCity" id="city"></li>
+                                    <li><input type="text" placeholder="Улица" name="deliveryStreet" id="street"></li>
+                                    <li><input type="text" placeholder="Дом" name="deliveryHouseNumber" id="houseNumber"></li>
+                                    <li><input type="text" placeholder="Квартира/офис" name="deliveryApartament" id="apartment"></li>
                                     </ul>
                                 `)
     },
@@ -89,11 +88,10 @@ const ordering = {
                                             <p>+1 123 456 78 90</p>
                                         </li>
                                         <li>
-                                            <img src="" alt="">
+                                            <a href="https://goo.gl/maps/yb1yx2LxuXiY7o7S7" target="_blank"><img src="../img/other/map.jpg" alt=""></a>
                                         </li>
                                     </ul>
-                                    </section>
-                                `)
+                                    </section>`)
     },
     scroll() {
         let orderBlock = document.querySelector('.order');
@@ -104,20 +102,40 @@ const ordering = {
         document.body.style.overflow = 'hidden'
     },
     choice() {
-        let choise = document.querySelectorAll('.custom-radio')
-        choise.forEach(item => item.addEventListener('click', (e) => {
+        let choice = document.querySelectorAll('.custom-radio')
+        choice.forEach(item => item.addEventListener('click', (e) => {
                 if (!document.querySelector('.our-address') && document.getElementById('pickup').checked) {
                     this.pickup()
+                    document.querySelector('.deliveryDetails_text').textContent = `При оформлении Самовывоза для
+                     уточнения товара в наличии с вами
+                     свяжется оператор. Если в течение 1 часа
+                     вам не перезвонили, свяжитесь с нами
+                     по телефону +1 123 456 78 90`
                         if (document.querySelector('.address')) {
                             document.querySelector('.address').remove()
                         }
                 } else if (!document.querySelector('.address') && document.getElementById('delivery').checked) {
                     this.delivery()
+                    document.querySelector('.deliveryDetails_text').textContent = `При оформлении Доставки для уточнения
+                                    даты и времени доставки с вами свяжется
+                                    оператор. Если в течение 1 часа вам
+                                    не перезвонили, свяжитесь с нами
+                                    по телефону +1 123 456 78 90`
                         if (document.querySelector('.our-address')) {
                             document.querySelector('.our-address').remove()
                         }
                 }
             }
         ))
+    },
+    form(){
+        let forma = document.getElementById('formResult')
+
+    },
+    formSubm (){
+        document.getElementById('submit').addEventListener('click', (e) => {
+            e.preventDefault()
+            this.form()
+        })
     }
 }

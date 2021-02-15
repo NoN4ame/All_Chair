@@ -1,5 +1,6 @@
 const cart = [];
 const promo = ['2021', '2020'];
+const totalS = [];
 // Вешаем обработчик на элемент "Корзина"
 
 document.getElementById('cart').addEventListener('click', cartInit)
@@ -19,10 +20,10 @@ document.getElementById('cart').addEventListener('click', cartInit)
             renderCart()
             triggers()
             cartBottom()
+            order()
         }
         quantity()
         delChoice()
-        order()
     }
 // Отрисовка шаблона
 const renderCart = () => {
