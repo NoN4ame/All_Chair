@@ -974,4 +974,8 @@ footer {
   column-gap: 66px;
 }
 
+.big_photo {
+  position: fixed;
+}
+
 /*# sourceMappingURL=about_us.css.map */
