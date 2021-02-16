@@ -604,6 +604,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 .product:hover {
   transform: scale(1.2);
   cursor: pointer;
+  color: #f54f4f;
 }
 .product img {
   width: 309px;
@@ -1465,6 +1466,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 .product:hover {
   transform: scale(1.2);
   cursor: pointer;
+  color: #f54f4f;
 }
 .product img {
   width: 309px;

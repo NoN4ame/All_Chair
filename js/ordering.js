@@ -4,13 +4,13 @@ const ordering = {
     },
     render() {
         document.getElementById('ordering').addEventListener('click', () => {
-            //
+            //Финальная цена
             let totalPrice = (document.querySelector('.total-price').textContent)
             document.querySelector('.cart').remove()
             document.querySelector('.invisible').insertAdjacentHTML('beforeend',
                 `<div class="order">
                         <img class="close" src="../img/other/close.svg" alt="">
-                        <a href="#">Вернуться в корзину</a>
+                        <a class="backCart" href="#">Вернуться в корзину</a>
                         <h1>ОФОРМЛЕНИЕ ЗАКАЗА</h1>
                         <form id="formResult" action="#">
                         <p class="headers">СПОСОБ ПОЛУЧЕНИЯ</p>
@@ -56,7 +56,7 @@ const ordering = {
                       </div>`)
             this.scroll()
             this.choice()
-            this.formSubm()
+            this.backCart()
         })
     },
     delivery() {
@@ -128,14 +128,11 @@ const ordering = {
             }
         ))
     },
-    form(){
-        let forma = document.getElementById('formResult')
-
-    },
-    formSubm (){
-        document.getElementById('submit').addEventListener('click', (e) => {
-            e.preventDefault()
-            this.form()
+    backCart() {
+        document.querySelector('.backCart').addEventListener('click', (e) => {
+            document.querySelector('.order').remove()
+            document.querySelector('.invisible').remove()
+            cartInit()
         })
     }
 }

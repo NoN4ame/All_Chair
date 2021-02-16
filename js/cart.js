@@ -1,6 +1,6 @@
 const cart = [];
 const promo = ['2021', '2020'];
-const totalS = [];
+
 // Вешаем обработчик на элемент "Корзина"
 
 document.getElementById('cart').addEventListener('click', cartInit)
@@ -61,8 +61,6 @@ const quantity = () => {
             find.totalPrice = find.price * find.quantity
             el.querySelector('.quantity-result').innerHTML = String(find.quantity)
             // Нижняя часть корзины
-            let sum = 0;
-            let totalSum = cart.reduce((a,b) => a + b.totalPrice, sum);
             totalPrice()
         } else if (e.target === minus && find.quantity > 1) {
             find.quantity--
@@ -131,7 +129,7 @@ const emptyCart = () => {
     document.querySelector('.cart').insertAdjacentHTML('beforeend',
         `<p class="empty-cart">Корзина Пуста</p>
                                           <a href="../templates/catalog.html">
-                                              <button>В каталог</button>
+                                              <button class="btn">В каталог</button>
                                           </a>`)
 }
 //Подсчет общей суммы
