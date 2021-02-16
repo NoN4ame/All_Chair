@@ -55,22 +55,25 @@
   & div
     margin-right: 12px
     transition: 0.6s
+    position: relative
     &:nth-child(1)
       margin-bottom: 5px
     &:nth-child(even)
       margin-right: 0
-    &:hover
+    &:hover>.photo
       filter: brightness(0.7)
       cursor: pointer
-      &:hover >.open-img
-        display: block
-        top: 45%
-        left: 50%
-      &:hover:nth-child(2) >.open-img
-          left: 45%
+    &:hover >.open-img
+      display: block
+      top: 45%
+      left: 50%
+      cursor: pointer
+    &:hover:nth-child(2) >.open-img
+        left: 45%
     & > .open-img
       display: none
       position: absolute
+
 
 .our-choice
   margin-bottom: 150px

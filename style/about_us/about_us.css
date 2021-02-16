@@ -604,6 +604,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 .product:hover {
   transform: scale(1.2);
   cursor: pointer;
+  color: #f54f4f;
 }
 .product img {
   width: 309px;
@@ -936,6 +937,7 @@ footer {
 .our-projects__content div {
   margin-right: 12px;
   transition: 0.6s;
+  position: relative;
 }
 .our-projects__content div:nth-child(1) {
   margin-bottom: 5px;
@@ -943,16 +945,17 @@ footer {
 .our-projects__content div:nth-child(even) {
   margin-right: 0;
 }
-.our-projects__content div:hover {
+.our-projects__content div:hover > .photo {
   filter: brightness(0.7);
   cursor: pointer;
 }
-.our-projects__content div:hover:hover > .open-img {
+.our-projects__content div:hover > .open-img {
   display: block;
   top: 45%;
   left: 50%;
+  cursor: pointer;
 }
-.our-projects__content div:hover:hover:nth-child(2) > .open-img {
+.our-projects__content div:hover:nth-child(2) > .open-img {
   left: 45%;
 }
 .our-projects__content div > .open-img {
