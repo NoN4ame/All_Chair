@@ -975,7 +975,16 @@ footer {
 }
 
 .big_photo {
-  position: fixed;
+  height: 740px;
+  position: relative;
+  top: 13%;
+}
+
+#photo {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 100%;
 }
 
 /*# sourceMappingURL=about_us.css.map */
