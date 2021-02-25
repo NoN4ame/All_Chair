@@ -1,30 +1,32 @@
-const cart = [];
+let cart = [];
 const promo = ['2021', '2020'];
 
 // Вешаем обработчик на элемент "Корзина"
-
 document.getElementById('cart').addEventListener('click', cartInit)
-    // При клике создаем шаблон для корзины
-    function cartInit() {
-        document.querySelector('main').insertAdjacentHTML('beforeend',
-            `<div class="invisible">
+
+// При клике создаем шаблон для корзины
+function cartInit() {
+    localData()
+    document.querySelector('main').insertAdjacentHTML('beforeend',
+        `<div class="invisible">
                     <div class="cart">
                     <h1>КОРЗИНА</h1>
                     <img class="close" src="../img/other/close.svg" alt="close">
                   </div>
             </div>`)
+    if (sessionStorage.key(0) === 'array') {
+        cart = JSON.parse(sessionStorage.getItem('array'))
+        renderCart()
+    } else {
         if (cart.length === 0) {
             emptyCart()
             triggers()
         } else {
             renderCart()
-            triggers()
-            cartBottom()
-            order()
         }
-        quantity()
-        delChoice()
     }
+}
+
 // Отрисовка шаблона
 const renderCart = () => {
     for (let i = 0; i < cart.length; i++) {
@@ -47,7 +49,12 @@ const renderCart = () => {
                     </span>
                </div>`)
     }
-    scroll ()
+    triggers()
+    cartBottom()
+    order()
+    localData()
+    quantity()
+    delChoice()
 }
 // Подсчет кол-ва товаров и вывод суммы с учетом кол-ва
 const quantity = () => {
@@ -99,7 +106,7 @@ const delItem = (cartItem) => {
         // Если клик по "Вернуть в корзину", то удаляем плашку с выбором
         if (e.target === returnInCart) {
             item.remove()
-        // Если по удалить
+            // Если по удалить
         } else if (e.target === delSubmit) {
             // Удаляем товар сначала HTML
             cartItem.remove()
@@ -108,6 +115,7 @@ const delItem = (cartItem) => {
             if (index !== -1) {
                 // Если нашли, то удаляем
                 cart.splice(index, 1)
+                localData()
             }
             // После удаления меням кол-во товара в корзине и считаем общую стоимость
             let quantity = document.querySelector('.quantity');
@@ -135,14 +143,14 @@ const emptyCart = () => {
 //Подсчет общей суммы
 const totalPrice = () => {
     let sum = 0;
-    let totalSum = cart.reduce((a,b) => a + b.totalPrice, sum);
+    let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
     document.querySelector('.total-price').innerHTML = `${totalSum.toLocaleString()}  &#8381;`
 }
 // Нижняя часть корзины
 function cartBottom() {
     // Подсчет общей суммы товаров в массиве без учета кол-ва
     let sum = 0;
-    let totalSum = cart.reduce((a,b) => a + b.totalPrice, sum);
+    let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
     // Рендер нижней части корзины (Промокод, Цены)
     document.querySelector('.cart').insertAdjacentHTML('beforeend',
         `<div class="cart-bottom">
@@ -159,6 +167,7 @@ function cartBottom() {
     promoCode()
     // Вызов метода, промокода и скидок
 }
+
 // Промокод для корзины
 function promoCode() {
     let codeValue = document.getElementById('promoCodeValue')
@@ -180,6 +189,7 @@ function promoCode() {
         }
     })
 }
+
 // Стили заднего фона
 function styleCard() {
     document.querySelector('body').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
@@ -187,7 +197,9 @@ function styleCard() {
     document.querySelectorAll('.container')
         .forEach(div => div.style.filter = 'brightness(0.5)')
     document.querySelectorAll('.container')[0].style.filter = 'none'
+    scroll()
 }
+
 // События по закрытию корзины и карточек товара
 function triggers() {
     styleCard()
@@ -204,6 +216,7 @@ function triggers() {
             document.querySelector('header').style.filter = 'none'
             document.querySelectorAll('.container')
                 .forEach(div => div.style.filter = 'none')
+            localData()
         }
     })
     // Вешаем обработчик при наведении
@@ -216,7 +229,8 @@ function triggers() {
         } else document.querySelector('.close').src = '../img/other/close.svg'
     })
 }
-function scroll () {
+
+function scroll() {
     if (cart.length >= 3) {
         document.querySelector('.cart').style.overflowY = 'scroll'
         document.querySelector('.cart').style.top = '3.5%'
@@ -225,7 +239,18 @@ function scroll () {
         document.body.style.overflow = 'hidden'
     } else document.querySelector('.cart').style.height = 'auto'
 }
+
 // Переход на оформление заказа
-function order (){
+function order() {
     ordering.init()
+}
+
+// Работа с локальными данными
+function localData() {
+    if (cart.length > 0) {
+        let cartData = JSON.stringify(cart)
+        sessionStorage.setItem('array', cartData)
+    } else if (cart.length === 0) {
+        sessionStorage.removeItem('array')
+    }
 }
