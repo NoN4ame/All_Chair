@@ -112,6 +112,7 @@ const prodCard = {
                         totalPrice: parseInt(price.replace(/\s/g, ''))
                     })
                 )
+                localData()
                 // Меняем кнопку купить, на В корзине
                 buyButton.remove()
                 document.querySelector('.card__aboutGoods').insertAdjacentHTML('beforebegin', `

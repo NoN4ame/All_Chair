@@ -54,7 +54,7 @@
   z-index: 100;
   position: fixed;
   left: 27%;
-  top: 20%;
+  top: 17%;
   background-color: white;
   padding: 94px 76px 88px 46px;
 }
@@ -864,6 +864,14 @@ footer {
 }
 .footer__content > .navigation ul .navigation__text a:hover {
   color: #f54f4f;
+}
+
+.active {
+  display: block !important;
+  color: #f54f4f;
+}
+.active > .product__name {
+  color: #323232;
 }
 
 .all-products {

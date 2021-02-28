@@ -1,9 +1,8 @@
 let cart = [];
 const promo = ['2021', '2020'];
-
 // Вешаем обработчик на элемент "Корзина"
+cartCounter()
 document.getElementById('cart').addEventListener('click', cartInit)
-
 // При клике создаем шаблон для корзины
 function cartInit() {
     localData()
@@ -127,6 +126,7 @@ const delItem = (cartItem) => {
                 quantity.remove()
                 document.querySelector('.cart-bottom').remove()
                 emptyCart()
+                removeData()
             }
         }
     }))
@@ -146,6 +146,7 @@ const totalPrice = () => {
     let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
     document.querySelector('.total-price').innerHTML = `${totalSum.toLocaleString()}  &#8381;`
 }
+
 // Нижняя часть корзины
 function cartBottom() {
     // Подсчет общей суммы товаров в массиве без учета кол-ва
@@ -250,7 +251,18 @@ function localData() {
     if (cart.length > 0) {
         let cartData = JSON.stringify(cart)
         sessionStorage.setItem('array', cartData)
-    } else if (cart.length === 0) {
-        sessionStorage.removeItem('array')
+    }
+}
+// Удаление хранилища
+function removeData () {
+    sessionStorage.removeItem('array')
+}
+// Подсчет кол-ва товара из локального хранилища
+function cartCounter() {
+    if (cart.length === 0 && sessionStorage.key(0) === 'array') {
+        cart = JSON.parse(sessionStorage.getItem('array'))
+        document.getElementById('cart').insertAdjacentHTML
+        ('beforeend', `<span class="quantity"></span>`)
+        document.querySelector('.quantity').innerHTML = cart.length
     }
 }
