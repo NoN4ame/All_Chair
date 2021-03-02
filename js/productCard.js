@@ -2,6 +2,7 @@ const prodCard = {
     // Инициализация карточки товара
     init() {
         this.productInfo()
+        this.discount()
     },
     // Все о товаре
     productInfo() {
@@ -22,6 +23,7 @@ const prodCard = {
                 // Цена продукта
                 let price = productContainer.querySelector('.product__price');
                 let vendorCode = productContainer.querySelector('.product__vendorCode')
+                let discount = productContainer.querySelector('.discount')
                 // Вызываем метод отрисовки карточки товара
                 this.renderCard(imgSrc, name.textContent, price.textContent, vendorCode.textContent)
                 this.triggers(imgSrc, name.textContent, price.textContent, vendorCode.textContent)
@@ -30,7 +32,7 @@ const prodCard = {
         }
     },
     // Метод отрисовки карточки товара
-    renderCard(imgSrc, name, price, vendorCode) {
+    renderCard(imgSrc, name, price, vendorCode, discount) {
         // Ищем контейнер в который передастся карточка товара
         let cardContainer = document.querySelector('main')
         // Прописываем HTML шаблон
@@ -42,7 +44,9 @@ const prodCard = {
                         <div class="card__info">
                             <p class="card__name">${name}</p>
                             <p class="card__vendorCode">${vendorCode}</p>
+                            <section class="price">
                             <p class="card__price">${price}</p>
+                            </section>
                             <button id="in_cart" class="btn">В корзину</button>
                             <p class="card__aboutGoods">The Series 7™ chair is an icon in modern<br>
                                furniture history, designed by Arne Jacobsen<br>
@@ -160,6 +164,27 @@ const prodCard = {
                 document.querySelector('.invisible').remove()
                 cartInit()
             })
+        }
+    },
+    discount () {
+        let discountProd = document.querySelectorAll('.discount')
+        for (let i = 0; i < discountProd.length; i++) {
+            if (discountProd[i].classList.contains('product')) {
+                discountProd[i].style.position = 'relative'
+                discountProd[i].insertAdjacentHTML('afterbegin', `
+                <span class="sale"><p>sale</p></span>
+                `)
+                //discountProd[i].querySelector('.product__price').remove()
+                discountProd[i].querySelector('.price').insertAdjacentHTML('afterbegin',`
+                <p class="sale_price">1 700 &#8381;</p>
+                `)
+                discountProd[i].querySelector('.sale_price').style.textDecoration = 'none'
+                discountProd[i].querySelector('.product__price').style.textDecoration = 'line-through'
+                discountProd[i].querySelector('.product__price').style.color = '#c4c4c4'
+                discountProd[i].querySelector('.price').style.display = 'flex'
+                discountProd[i].querySelector('.price').style.justifyContent = 'space-around'
+                discountProd[i].querySelector('.price').style.padding = '0 75px'
+            }
         }
     }
 }
