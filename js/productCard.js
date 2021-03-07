@@ -174,9 +174,11 @@ const prodCard = {
                 discountProd[i].insertAdjacentHTML('afterbegin', `
                 <span class="sale"><p>sale</p></span>
                 `)
-                //discountProd[i].querySelector('.product__price').remove()
+                // Расчет скидки
+                let oldPrice = parseInt((discountProd[i].querySelector('.product__price').textContent).replace(/\s/g, ''))
+                console.log(oldPrice);
                 discountProd[i].querySelector('.price').insertAdjacentHTML('afterbegin',`
-                <p class="sale_price">1 700 &#8381;</p>
+                <p class="sale_price">${oldPrice -(oldPrice * 0.2)} &#8381;</p>
                 `)
                 discountProd[i].querySelector('.sale_price').style.textDecoration = 'none'
                 discountProd[i].querySelector('.product__price').style.textDecoration = 'line-through'
@@ -186,6 +188,9 @@ const prodCard = {
                 discountProd[i].querySelector('.price').style.padding = '0 75px'
             }
         }
+    },
+    salesStyle() {
+
     }
 }
 prodCard.init()
