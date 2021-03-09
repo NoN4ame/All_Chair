@@ -13,6 +13,7 @@ const prodCard = {
             goods[i].addEventListener('click', (event) => {
                 // Получаем полную карточку товара при клике
                 let productContainer = event.target.parentNode
+                console.log(productContainer);
                 // Находим в родителе:
                 // Картинка
                 let img = productContainer.getElementsByTagName('img'),
@@ -23,16 +24,33 @@ const prodCard = {
                 // Цена продукта
                 let price = productContainer.querySelector('.product__price');
                 let vendorCode = productContainer.querySelector('.product__vendorCode')
-                let discount = productContainer.querySelector('.discount')
-                // Вызываем метод отрисовки карточки товара
-                this.renderCard(imgSrc, name.textContent, price.textContent, vendorCode.textContent)
-                this.triggers(imgSrc, name.textContent, price.textContent, vendorCode.textContent)
+                // Проверяем есть ли у продукта класс discount
+                // Если класс есть то отрисовываем с учетом скидки
+                if (productContainer.classList.contains('discount')) {
+                    // Скидка
+                    let discount = productContainer.querySelector('.sale_price').textContent
+
+                    this.renderCard(imgSrc, name.textContent, price.textContent, vendorCode.textContent)
+                    this.triggers(imgSrc, name.textContent, price.textContent, vendorCode.textContent)
+                    // Добавляем скидку в секцию price
+                    document.querySelector('.price').insertAdjacentHTML('afterbegin', `
+                    <p style="font-size: 24px" class="sale_price">${discount}</p>`)
+                    document.querySelector('.sale_price').style.paddingRight = '25px'
+                    document.querySelector('.card__price').classList.add('old_price')
+                    // Добавляем новый класс, который перечеркнет старую цену
+                    document.querySelector('.price').classList.add('discount')
+                // Если класса discount нет, то оставляем рендер без изменений
+                } else {
+                    // Вызываем метод отрисовки карточки товара
+                    this.renderCard(imgSrc, name.textContent, price.textContent, vendorCode.textContent)
+                    this.triggers(imgSrc, name.textContent, price.textContent, vendorCode.textContent)
+                }
                 this.productAvailability()
             })
         }
     },
     // Метод отрисовки карточки товара
-    renderCard(imgSrc, name, price, vendorCode, discount) {
+    renderCard(imgSrc, name, price, vendorCode) {
         // Ищем контейнер в который передастся карточка товара
         let cardContainer = document.querySelector('main')
         // Прописываем HTML шаблон
@@ -44,7 +62,7 @@ const prodCard = {
                         <div class="card__info">
                             <p class="card__name">${name}</p>
                             <p class="card__vendorCode">${vendorCode}</p>
-                            <section class="price">
+                            <section class="price">           
                             <p class="card__price">${price}</p>
                             </section>
                             <button id="in_cart" class="btn">В корзину</button>
@@ -105,8 +123,27 @@ const prodCard = {
             if (e.target === buyButton) {
                 // Получаем Артикул
                 let vendorCode = document.querySelector('.card__vendorCode').textContent;
+                let currentPrice = document.querySelector('.sale_price').textContent
+                // Считаем размер скидки
+                let discount = parseInt(price.replace(/\s/g, '')) - parseInt(currentPrice.replace(/\s/g, ''))
                 // Создаем объект который добавляем в массив корзины
-                cart.push(new Object({
+                // Проверяем есть ли у товара класс, в котором есть скидка
+                // Если да, то в цену записываем товар уже со скидкой
+                if (card.querySelector('.price').classList.contains('discount')) {
+                    cart.push(new Object({
+                        id: cart.length + 1,
+                        img: imgSrc,
+                        name: name,
+                        quantity: 1,
+                        vendorCode: vendorCode,
+                        oldPrice: parseInt(price.replace(/\s/g, '')),
+                        price: parseInt(currentPrice.replace(/\s/g, '')),
+                        currentDiscount: discount,
+                        totalPrice: parseInt(currentPrice.replace(/\s/g, ''))
+                    }))
+                    // Если такого класса нет, то просто добавляем товар в корзину
+                } else {
+                    cart.push(new Object({
                         id: cart.length + 1,
                         img: imgSrc,
                         name: name,
@@ -114,8 +151,8 @@ const prodCard = {
                         vendorCode: vendorCode,
                         price: parseInt(price.replace(/\s/g, '')),
                         totalPrice: parseInt(price.replace(/\s/g, ''))
-                    })
-                )
+                    }))
+                }
                 localData()
                 // Меняем кнопку купить, на В корзине
                 buyButton.remove()
@@ -126,7 +163,7 @@ const prodCard = {
                                 <p>Вы можете изменить кол-во товара <span id="inCart">в корзине</span></p>
                             </div>
                 `)
-                document.getElementById('inCart').addEventListener('click', (e) => {
+                document.getElementById('inCart').addEventListener('click', () => {
                     document.querySelector('.card').remove()
                     document.querySelector('.invisible').remove()
                     cartInit()
@@ -139,7 +176,7 @@ const prodCard = {
                 // Находим элемент "счетчика"
                 let quantity = document.querySelector('.quantity');
                 // Добавляем в "счетчик" длину массива(кол-во товаров в корзине)
-                quantity.innerHTML = cart.length
+                quantity.innerHTML = cart.length.toLocaleString()
                 // Если товаров 10 и больше, не много меняем css, для более корректного отображение счетчика
                 if (cart.length >= 10) {
                     quantity.style.padding = '2.5px 5px'
@@ -147,10 +184,10 @@ const prodCard = {
             }
         })
     },
-    // Проверка на наличие товара в корзине
+// Проверка на наличие товара в корзине
     productAvailability() {
         let index = cart.findIndex(n => n.vendorCode === document.querySelector('.card__vendorCode').textContent)
-        if (index !== -1){
+        if (index !== -1) {
             document.getElementById('in_cart').remove()
             document.querySelector('.card__aboutGoods').insertAdjacentHTML('beforebegin', `
                             <div class="cart__itemAdded">
@@ -159,38 +196,36 @@ const prodCard = {
                                 <p>Вы можете изменить кол-во товара <span id="inCart">в корзине</span></p>
                             </div>
                 `)
-            document.getElementById('inCart').addEventListener('click', (e) => {
+            document.getElementById('inCart').addEventListener('click', () => {
                 document.querySelector('.card').remove()
                 document.querySelector('.invisible').remove()
                 cartInit()
             })
         }
     },
-    discount () {
+    // Расчет скидки
+    discount() {
+        // Получаем все товары, в которых есть скидка и перебираем их в цикле
         let discountProd = document.querySelectorAll('.discount')
         for (let i = 0; i < discountProd.length; i++) {
+            // Проверяем чтоб у эл-та был класс discount и product, если они есть, отрисовываем значок Sale
             if (discountProd[i].classList.contains('product')) {
                 discountProd[i].style.position = 'relative'
                 discountProd[i].insertAdjacentHTML('afterbegin', `
-                <span class="sale"><p>sale</p></span>
-                `)
+                <span class="sale"><p>sale</p></span>`)
                 // Расчет скидки
                 let oldPrice = parseInt((discountProd[i].querySelector('.product__price').textContent).replace(/\s/g, ''))
-                console.log(oldPrice);
-                discountProd[i].querySelector('.price').insertAdjacentHTML('afterbegin',`
-                <p class="sale_price">${oldPrice -(oldPrice * 0.2)} &#8381;</p>
+                discountProd[i].querySelector('.price').insertAdjacentHTML('afterbegin', `
+                <p class="sale_price">${(oldPrice - (oldPrice * 0.2)).toLocaleString()} &#8381;</p>
                 `)
+                // Стили для блока price
                 discountProd[i].querySelector('.sale_price').style.textDecoration = 'none'
-                discountProd[i].querySelector('.product__price').style.textDecoration = 'line-through'
-                discountProd[i].querySelector('.product__price').style.color = '#c4c4c4'
-                discountProd[i].querySelector('.price').style.display = 'flex'
                 discountProd[i].querySelector('.price').style.justifyContent = 'space-around'
                 discountProd[i].querySelector('.price').style.padding = '0 75px'
+                // Добавляем новый класс, который перечеркнет старую цену
+                discountProd[i].querySelector('.product__price').classList.add('old_price')
             }
         }
     },
-    salesStyle() {
-
-    }
 }
 prodCard.init()

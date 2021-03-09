@@ -3,6 +3,7 @@ const promo = ['2021', '2020'];
 // Вешаем обработчик на элемент "Корзина"
 cartCounter()
 document.getElementById('cart').addEventListener('click', cartInit)
+
 // При клике создаем шаблон для корзины
 function cartInit() {
     localData()
@@ -68,12 +69,14 @@ const quantity = () => {
             el.querySelector('.quantity-result').innerHTML = String(find.quantity)
             // Нижняя часть корзины
             totalPrice()
+            discount()
         } else if (e.target === minus && find.quantity > 1) {
             find.quantity--
             el.querySelector('.quantity-result').innerHTML = String(find.quantity)
             find.totalPrice = find.price * find.quantity
             // Нижняя часть корзины
             totalPrice()
+            discount()
         }
     }))
 }
@@ -152,6 +155,8 @@ function cartBottom() {
     // Подсчет общей суммы товаров в массиве без учета кол-ва
     let sum = 0;
     let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
+    let findDiscount = cart.filter(item => item.currentDiscount)
+    let totalDiscount = findDiscount.reduce((a, b) => a + b.currentDiscount, sum)
     // Рендер нижней части корзины (Промокод, Цены)
     document.querySelector('.cart').insertAdjacentHTML('beforeend',
         `<div class="cart-bottom">
@@ -159,7 +164,7 @@ function cartBottom() {
                     <input id="promoCodeValue" type="text" placeholder="Промокод" value="" maxlength="4">
                 </section>
                 <section class="result">
-                    <section><p>Скидка: <p class="sales-result"></p></p></section>
+                    <section><p>Скидка: <p class="sales-result">${totalDiscount.toLocaleString()} &#8381;</p></p></section>
                     <section><p>Промокод: <p class="promo-code-result"></p></p></section>
                     <section><p>К ОПЛАТЕ: <p class="total-price">${totalSum.toLocaleString()} &#8381;</p></p></section>
                     <button class="btn" id="ordering">ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button>
@@ -167,6 +172,16 @@ function cartBottom() {
             </div>`)
     promoCode()
     // Вызов метода, промокода и скидок
+}
+
+function discount() {
+    let findDiscount = cart.filter(item => item.currentDiscount)
+    findDiscount.forEach((el) => {
+        el.currentDiscount = (el.oldPrice * el.quantity) - el.totalPrice
+    })
+    let sum = 0
+    let totalDiscount = findDiscount.reduce((a, b) => a + b.currentDiscount, sum)
+    document.querySelector('.sales-result').innerHTML = `${totalDiscount.toLocaleString()}  &#8381;`
 }
 
 // Промокод для корзины
@@ -179,7 +194,7 @@ function promoCode() {
             let sum = 0;
             let totalSum = cart.reduce((a, b) => a + b.totalPrice, sum);
             let discount = (totalSum * 0.2);
-            document.querySelector('.promo-code-result').innerHTML = `- ${discount.toLocaleString()}  &#8381;`
+            document.querySelector('.promo-code-result').innerHTML = `${discount.toLocaleString()}  &#8381;`
             document.querySelector('.total-price').innerHTML = `${(totalSum - discount).toLocaleString()} &#8381; `
             // Если совпадение нет, то возвращаем все как было
         } else {
@@ -253,10 +268,12 @@ function localData() {
         sessionStorage.setItem('array', cartData)
     }
 }
+
 // Удаление хранилища
-function removeData () {
+function removeData() {
     sessionStorage.removeItem('array')
 }
+
 // Подсчет кол-ва товара из локального хранилища
 function cartCounter() {
     if (cart.length === 0 && sessionStorage.key(0) === 'array') {
