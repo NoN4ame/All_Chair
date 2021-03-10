@@ -170,6 +170,9 @@ function cartBottom() {
                     <button class="btn" id="ordering">ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button>
                 </section>
             </div>`)
+    if (totalDiscount === 0) {
+        document.querySelector('.sales-result').style.display = 'none'
+    }
     promoCode()
     // Вызов метода, промокода и скидок
 }

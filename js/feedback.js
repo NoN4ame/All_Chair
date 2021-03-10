@@ -18,13 +18,14 @@ const feedBack = {
                                 обновленного каталога продукции каждый месяц</p>
                                 <form action="#">
                                     <input id="email" type="email" placeholder="E-mail">
-                                    <button class="btn" type="submit">ПОДПИСАТЬСЯ</button>
+                                    <button id="subscribe-submit" class="btn" type="submit">ПОДПИСАТЬСЯ</button>
                                 </form>
                             </div>
                           </div>`)}
             // Вызываем стили для заднего фона
             this.styleCard()
             this.closeCard()
+            document.getElementById('subscribe-submit').addEventListener('click', this.validation)
         })
     },
     // Стили заднего фона при открытой карточке товара
@@ -60,6 +61,17 @@ const feedBack = {
                 // Если курсор не на иконке, то оставляем стандартную иконку
             } else document.querySelector('.close').src='../img/other/close.svg'
         })
+    },
+    validation(event) {
+        let regexp_name = /^[a-zа-яё]+/gi,
+            regexp_phone = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/,
+            regexp_email = /^.+@.+\..+$/igm;
+        let email = document.getElementById('email').value
+        console.log(email)
+            if (regexp_email.test(email) !== true) {
+                console.log('не валидно')
+                event.preventDefault()
+            }
     }
 }
 feedBack.init()
