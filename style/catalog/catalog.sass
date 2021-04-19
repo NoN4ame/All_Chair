@@ -5,7 +5,13 @@
   color: $pink
   &>.product__name
     color: $black
-
+.banner__catalog
+  background-image: url("../../img/other/catalog_banner.png")
+  background-repeat: no-repeat
+  padding-top: 283px
+  background-position: bottom
+  &>.container>.category
+    position: relative
 .all-products
   margin-top: 120px
   margin-bottom: 70px
@@ -33,10 +39,14 @@
 .new-collection
   position: relative
   height: 560px
+  background-image: url("../../img/other/winter_collection.png")
+  background-repeat: no-repeat
+  background-position: center
   &__text
-    position: absolute
+    position: relative
     z-index: 10
     padding: 230px 0
+    top: -50px
     &__main
       font-size: $category
       color: $black

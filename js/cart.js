@@ -123,6 +123,7 @@ const delItem = (cartItem) => {
             let quantity = document.querySelector('.quantity');
             quantity.innerHTML = String(cart.length)
             totalPrice()
+            discount()
             // Если в массиве ни чего нет, выводим шаблон пустой корзины
             if (cart.length === 0) {
                 cartItem.remove()
@@ -209,19 +210,10 @@ function promoCode() {
     })
 }
 
-// Стили заднего фона
-function styleCard() {
-    document.querySelector('body').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-    document.querySelector('header').style.filter = 'brightness(0.5)'
-    document.querySelectorAll('.container')
-        .forEach(div => div.style.filter = 'brightness(0.5)')
-    document.querySelectorAll('.container')[0].style.filter = 'none'
-    scroll()
-}
-
 // События по закрытию корзины и карточек товара
 function triggers() {
-    styleCard()
+    prodCard.styleCard()
+    scroll()
     // Получаем блок обертку
     let card = document.querySelector('.invisible');
     // Вешаем на него обработчик событий
@@ -229,12 +221,7 @@ function triggers() {
         // Если клик был по блоку или на иконку 'X', то закрываем карточку товара
         if (e.target === document.querySelector('.close')
             || e.target === document.querySelector('.invisible')) {
-            document.querySelector('.invisible').remove()
-            document.body.style.backgroundColor = 'transparent'
-            document.body.style.overflow = 'auto'
-            document.querySelector('header').style.filter = 'none'
-            document.querySelectorAll('.container')
-                .forEach(div => div.style.filter = 'none')
+            prodCard.delStyle()
             localData()
         }
     })
@@ -252,7 +239,7 @@ function triggers() {
 function scroll() {
     if (cart.length >= 3) {
         document.querySelector('.cart').style.overflowY = 'scroll'
-        document.querySelector('.cart').style.top = '3.5%'
+        document.querySelector('.cart').style.top = '50%'
         document.querySelector('.cart').style.height = '775px'
         document.querySelector('.cart').style.overflowX = 'none'
         document.body.style.overflow = 'hidden'

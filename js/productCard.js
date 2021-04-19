@@ -13,7 +13,6 @@ const prodCard = {
             goods[i].addEventListener('click', (event) => {
                 // Получаем полную карточку товара при клике
                 let productContainer = event.target.parentNode
-                console.log(productContainer);
                 // Находим в родителе:
                 // Картинка
                 let img = productContainer.getElementsByTagName('img'),
@@ -39,7 +38,7 @@ const prodCard = {
                     document.querySelector('.card__price').classList.add('old_price')
                     // Добавляем новый класс, который перечеркнет старую цену
                     document.querySelector('.price').classList.add('discount')
-                // Если класса discount нет, то оставляем рендер без изменений
+                    // Если класса discount нет, то оставляем рендер без изменений
                 } else {
                     // Вызываем метод отрисовки карточки товара
                     this.renderCard(imgSrc, name.textContent, price.textContent, vendorCode.textContent)
@@ -85,10 +84,25 @@ const prodCard = {
     // Стили заднего фона при открытой карточке
     styleCard() {
         document.querySelector('body').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+        document.querySelector('body').style.overflow = 'hidden'
         document.querySelector('header').style.filter = 'brightness(0.5)'
         document.querySelectorAll('.container')
             .forEach(div => div.style.filter = 'brightness(0.5)')
         document.querySelectorAll('.container')[0].style.filter = 'none'
+        document.querySelector('.banner').style.filter = 'brightness(0.5)'
+        document.querySelector('.new-collection').style.filter = 'brightness(0.5)'
+        document.querySelector('.subscribe').style.filter = 'brightness(0.5)'
+    },
+    delStyle() {
+        document.querySelector('.invisible').remove()
+        document.body.style.backgroundColor = 'transparent'
+        document.body.style.overflow = 'auto'
+        document.querySelector('header').style.filter = 'none'
+        document.querySelectorAll('.container')
+            .forEach(div => div.style.filter = 'none')
+        document.querySelector('.banner').style.filter = 'none'
+        document.querySelector('.new-collection').style.filter = 'none'
+        document.querySelector('.subscribe').style.filter = 'none'
     },
     // Событие закрытия карточки товара
     triggers(imgSrc, name, price) {
@@ -99,12 +113,7 @@ const prodCard = {
             // Если клик был по блоку или на иконку 'X', то закрываем карточку товара
             if (e.target === document.querySelector('.close')
                 || e.target === document.querySelector('.invisible')) {
-                document.querySelector('.card').remove()
-                document.querySelector('.invisible').remove()
-                document.querySelector('body').style.backgroundColor = 'transparent'
-                document.querySelector('header').style.filter = 'none'
-                document.querySelectorAll('.container')
-                    .forEach(div => div.style.filter = 'none')
+                this.delStyle()
             }
         })
         // Вешаем обработчик при наведении
@@ -123,13 +132,13 @@ const prodCard = {
             if (e.target === buyButton) {
                 // Получаем Артикул
                 let vendorCode = document.querySelector('.card__vendorCode').textContent;
-                let currentPrice = document.querySelector('.sale_price').textContent
+                let currentPrice = document.querySelector('.sale_price')
                 // Считаем размер скидки
-                let discount = parseInt(price.replace(/\s/g, '')) - parseInt(currentPrice.replace(/\s/g, ''))
                 // Создаем объект который добавляем в массив корзины
                 // Проверяем есть ли у товара класс, в котором есть скидка
                 // Если да, то в цену записываем товар уже со скидкой
                 if (card.querySelector('.price').classList.contains('discount')) {
+                    let discount = parseInt(price.replace(/\s/g, '')) - parseInt(currentPrice.textContent.replace(/\s/g, ''))
                     cart.push(new Object({
                         id: cart.length + 1,
                         img: imgSrc,
@@ -137,9 +146,9 @@ const prodCard = {
                         quantity: 1,
                         vendorCode: vendorCode,
                         oldPrice: parseInt(price.replace(/\s/g, '')),
-                        price: parseInt(currentPrice.replace(/\s/g, '')),
+                        price: parseInt(currentPrice.textContent.replace(/\s/g, '')),
                         currentDiscount: discount,
-                        totalPrice: parseInt(currentPrice.replace(/\s/g, ''))
+                        totalPrice: parseInt(currentPrice.textContent.replace(/\s/g, ''))
                     }))
                     // Если такого класса нет, то просто добавляем товар в корзину
                 } else {
@@ -203,7 +212,7 @@ const prodCard = {
             })
         }
     },
-    // Расчет скидки
+    // Расчет скидки на товар
     discount() {
         // Получаем все товары, в которых есть скидка и перебираем их в цикле
         let discountProd = document.querySelectorAll('.discount')

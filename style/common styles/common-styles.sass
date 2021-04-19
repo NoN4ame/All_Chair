@@ -91,11 +91,11 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button
     cursor: pointer
 .subscribe
   position: relative
-  margin-top: 230px
-  height: 492px
+  height: 645px
+  background-image: url("../../img/other/double_chairs.png")
+  background-repeat: no-repeat
+  background-position: center
   &__text
-    position: absolute
-    z-index: 10
     & p
       font-size: $price
       color: $black
@@ -116,7 +116,6 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button
     left: -412px
     z-index: 1
 .banner
-  padding-top: 281px
   background-color: #F6F6F4
   height: 210px
   width: 100%
@@ -129,8 +128,9 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button
       position: absolute
       z-index: 10
   &__img
-    position: absolute
-    top: -180px
+    position: relative
+    padding-bottom: 100px
+    top: 100px
     left: -412px
 .invisible
   z-index: 10000
@@ -139,47 +139,6 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button
   top: 0
   height: 100%
   left: 0
-.card
-  display: flex
-  z-index: 100
-  position: fixed
-  left: 27%
-  top: 20%
-  background-color: white
-  padding: 94px 76px 88px 46px
-  & > .close
-    position: absolute
-    width: 36px
-    height: 36px
-    right: 25px
-    top: 25px
-    cursor: pointer
-  & > .container
-    background-color: rgba(0, 0, 0, 0.5)
-  & img
-    width: 382px
-    height: 438px
-  &__name
-    font-size: $category
-    color: $black
-    font-weight: bold
-    padding-bottom: 15px
-  &__vendorCode
-    font-size: $little_text
-    color: $gray
-    padding-bottom: 23px
-  &__price
-    font-size: $project_name
-    color: $black
-  &__info > .btn
-    margin-top: 34px
-    margin-bottom: 45px
-    padding: 23px 64px 25px 72px
-  &__aboutGoods
-    font-size: $little_text
-    color: $black
-    line-height: 1.3
-
 .quantity
   position: absolute
   bottom: 10px

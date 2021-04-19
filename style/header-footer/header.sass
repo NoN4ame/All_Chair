@@ -10,12 +10,15 @@ body
 .container
   width: 1920px - 405px - 402px
   margin: 0 auto
+  overflow: hidden
 header
   padding: 40px 0
   position: fixed
   z-index: 101
   background-color: white
   width: 100%
+  &>.container
+    overflow: visible
 .header__content
   display: flex
   &__phone

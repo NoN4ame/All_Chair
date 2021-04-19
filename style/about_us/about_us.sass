@@ -1,6 +1,12 @@
 @import "../header-footer/header"
 @import "../header-footer/footer"
-
+.banner__aboutUs
+  background-repeat: no-repeat
+  background-image: url("../../img/other/aboutUs_banner.png")
+  padding-top: 283px
+  background-position: bottom
+  &>.container>.category
+    position: relative
 .banner
   & > .container > .logo
     position: relative
@@ -83,7 +89,9 @@
 .big_photo
   height: 740px
   position: relative
-  top: 13%
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
 #photo
   background-position: center
   background-repeat: no-repeat

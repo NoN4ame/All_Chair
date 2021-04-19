@@ -4,14 +4,14 @@
 
 main
   overflow: hidden
-  padding-top: 102px
+  margin-top: 412px
 .banner
   background-color: transparent
   height: 427px
   &__text
     position: absolute
     z-index: 10
-    top: -17px
+    top: 250px
     & p
       font-size: $price
       color: $black
@@ -19,7 +19,15 @@ main
       font-size: $category + 6px
       padding-top: 14px
       padding-bottom: 45px
-
+.main>.main__content
+  &>.subscribe
+    background-image: none
+    position: relative
+    margin-top: 230px
+    height: 492px
+    &>.subscribe__text
+      position: absolute
+      z-index: 10
 .goods__content
   display: grid
   grid-template-columns: repeat(3, 327px)

@@ -6,9 +6,10 @@
 .order
   z-index: 100
   position: fixed
-  margin: 0 480px
   width: 800px
-  top: 9.6%
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
   background-color: white
   padding: 55px 65px
   &>a
@@ -70,7 +71,7 @@ label
       &>li>input
         padding: 24px 0 26px 25px
         width: 350px
-        color: $gray
+        color: black
         outline: none
         border: 1px solid $gray
         font-size: $little_text
@@ -86,7 +87,7 @@ label
         &>input
           padding: 12px 0 12px 20px
           width: 350px
-          color: $gray
+          color: black
           outline: none
           border: 1px solid $gray
           font-size: $little_text
@@ -138,3 +139,14 @@ label
     background-image: url("../../img/other/checked.svg")
     background-position: center
     background-repeat: no-repeat
+.error
+  padding: 15px
+  background-color: rgba(187, 0, 0, 0.13)
+  color: #BB0000
+  margin-bottom: 10px
+  font-size: 15px
+.notValid
+  margin-bottom: 5px !important
+  border-color: red !important
+.order__content>.chooseDelivery>.error
+  width: 347px
