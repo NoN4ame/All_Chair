@@ -174,10 +174,10 @@ function cartBottom() {
     if (totalDiscount === 0) {
         document.querySelector('.sales-result').style.display = 'none'
     }
+    // Вызов метода, промокода
     promoCode()
-    // Вызов метода, промокода и скидок
 }
-
+// Расчет скидки
 function discount() {
     let findDiscount = cart.filter(item => item.currentDiscount)
     findDiscount.forEach((el) => {
@@ -214,6 +214,12 @@ function promoCode() {
 function triggers() {
     prodCard.styleCard()
     scroll()
+    if (document.querySelector('.new-collection')){
+        document.querySelector('.new-collection').style.filter = 'brightness(0.5)'
+    }
+    if (document.querySelector('.subscribe')){
+        document.querySelector('.subscribe').style.filter = 'brightness(0.5)'
+    }
     // Получаем блок обертку
     let card = document.querySelector('.invisible');
     // Вешаем на него обработчик событий
@@ -235,7 +241,7 @@ function triggers() {
         } else document.querySelector('.close').src = '../img/other/close.svg'
     })
 }
-
+// Вертикальная прокрутка корзины если товаров 3 и больше
 function scroll() {
     if (cart.length >= 3) {
         document.querySelector('.cart').style.overflowY = 'scroll'

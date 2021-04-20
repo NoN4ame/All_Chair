@@ -550,8 +550,9 @@ label {
   border-color: red !important;
 }
 
-.order__content > .chooseDelivery > .error {
+.order__content > .chooseDelivery > .error, .payment > .error {
   width: 347px;
+  margin-top: 10px;
 }
 
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
@@ -763,6 +764,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 body {
   overflow-x: hidden;
+  padding: 0 calc(20px - (100vw - 100%)) 0 0;
 }
 
 * {

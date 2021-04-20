@@ -134,14 +134,17 @@ const ordering = {
         })
     },
     validate() {
-        document.getElementById('submit').addEventListener('click', function (e) {
-            if (e.target === this) {
+        document.getElementById('submit').addEventListener('click', (e) => {
+            e.preventDefault()
+            if (e.target === document.getElementById('submit')) {
                 e.preventDefault()
                 let regexp_phone = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{11,17}$/
                 let inputs = document.querySelector('.aboutRecipient').getElementsByTagName('input')
-                let delivery = document.querySelector('.chooseDelivery').getElementsByTagName('input')
+                let chooseDelivery = document.querySelector('.chooseDelivery').getElementsByTagName('input')
                 let payment = document.querySelector('.payment').getElementsByTagName('input')
                 removeErrors()
+                this.validRadio('.chooseDelivery', chooseDelivery)
+                this.validRadio('.payment', payment)
                 let notValid = false
                 for (let i = 0; i < inputs.length; i++) {
                     if (inputs[i].value === '') {
@@ -161,13 +164,25 @@ const ordering = {
                         }
                     }
                 }
-                if (!notValid) {
-                    e.preventDefault()
-                    console.log('123')
-                }
             }
         })
     },
+    validRadio(name, el){
+        document.querySelector(name).addEventListener('click', (e) => {
+            if (e.target === el[0] || el[1]){
+                if (document.querySelector(name).querySelector('.error')) {
+                    document.querySelector(name).querySelector('.error').remove()
+                }
+                return e.target.checked = true
+            }
+        })
+        if (!(el[0].checked || el[1].checked)) {
+            document.querySelector(name).insertAdjacentHTML('beforeend',
+                `<div class="error">
+                                           <p>Выберите один из пунктов</p>
+                                       </div>`)
+        }
+    }
 }
 
 function errorMessage(where, text) {

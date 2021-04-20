@@ -90,9 +90,20 @@ const prodCard = {
             .forEach(div => div.style.filter = 'brightness(0.5)')
         document.querySelectorAll('.container')[0].style.filter = 'none'
         document.querySelector('.banner').style.filter = 'brightness(0.5)'
-        document.querySelector('.new-collection').style.filter = 'brightness(0.5)'
-        document.querySelector('.subscribe').style.filter = 'brightness(0.5)'
+        // Стили для блока новой коллекции, если он есть на странице
+        if (document.querySelector('.new-collection')){
+            document.querySelector('.new-collection').style.filter = 'brightness(0.5)'
+        }
+        // Стили для подписки, если она есть на странице
+        if (document.querySelector('.subscribe')){
+            document.querySelector('.subscribe').style.filter = 'brightness(0.5)'
+        }
+        // При скрытии вертикальной прокрутки страницы, меняем ширину блока навигации, что бы избежать 'сдвигов'
+        if (document.querySelector("header").style.filter === 'brightness(0.5)'){
+            document.querySelector("header").style.width = '99.1%'
+        }
     },
+    // Удаление стилей заднего фона
     delStyle() {
         document.querySelector('.invisible').remove()
         document.body.style.backgroundColor = 'transparent'
@@ -101,8 +112,13 @@ const prodCard = {
         document.querySelectorAll('.container')
             .forEach(div => div.style.filter = 'none')
         document.querySelector('.banner').style.filter = 'none'
-        document.querySelector('.new-collection').style.filter = 'none'
-        document.querySelector('.subscribe').style.filter = 'none'
+        if (document.querySelector('.new-collection')){
+            document.querySelector('.new-collection').style.filter = 'none'
+        }
+        if (document.querySelector('.subscribe')){
+            document.querySelector('.subscribe').style.filter = 'none'
+        }
+        document.querySelector("header").style.width = '100%'
     },
     // Событие закрытия карточки товара
     triggers(imgSrc, name, price) {
