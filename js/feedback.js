@@ -56,8 +56,10 @@ const feedBack = {
         // Проверяем введенные данные в поле email
         if (!regexp_email.test(email)) {
             event.preventDefault()
+            removeErrors()
             errorMessage(document.getElementById('subscribe-submit'), 'Введите email')
             // Корректируем стиль ошибки
+            document.getElementById('email').style.borderColor = 'red'
             document.querySelector('.error').style.marginTop = '10px'
             document.querySelector('.error').style.position = 'absolute'
             document.querySelector('.error').style.width = '243px'

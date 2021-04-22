@@ -247,7 +247,7 @@ function scroll() {
         document.querySelector('.cart').style.overflowY = 'scroll'
         document.querySelector('.cart').style.top = '50%'
         document.querySelector('.cart').style.height = '775px'
-        document.querySelector('.cart').style.overflowX = 'none'
+        document.querySelector('.cart').style.overflowX = 'hidden'
         document.body.style.overflow = 'hidden'
     } else document.querySelector('.cart').style.height = 'auto'
 }

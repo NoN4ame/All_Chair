@@ -6,7 +6,9 @@ const ordering = {
         document.getElementById('ordering').addEventListener('click', () => {
             //Финальная цена
             let totalPrice = (document.querySelector('.total-price').textContent)
+            // Удаляем блок корзины
             document.querySelector('.cart').remove()
+            // Рендер шаблона оформления заказа
             document.querySelector('.invisible').insertAdjacentHTML('beforeend',
                 `<div class="order">
                         <img class="close" src="../img/other/close.svg" alt="">
@@ -59,6 +61,7 @@ const ordering = {
             this.backCart()
         })
     },
+    // Шаблон доставки
     delivery() {
         document.querySelector('.aboutRecipient').insertAdjacentHTML('beforeend',
             ` <section class="address">
@@ -71,6 +74,7 @@ const ordering = {
                         </ul>
                     </section>`)
     },
+    // Шаблон самовывоза
     pickup() {
         document.querySelector('.aboutRecipient').insertAdjacentHTML('beforeend',
             `<section class="our-address">
@@ -92,16 +96,19 @@ const ordering = {
                      </ul>
                      </section>`)
     },
+    // Вертикальная прокрутка при заказе
     scroll() {
         let orderBlock = document.querySelector('.order');
         orderBlock.style.overflowY = 'scroll'
         orderBlock.style.height = '775px'
-        orderBlock.style.overflowX = 'none'
+        orderBlock.style.overflowX = 'hidden'
         document.body.style.overflow = 'hidden'
     },
+    // Рендер шаблонов по доставке или самовывозе (в зависимости от выбранного)
     choice() {
         let choice = document.querySelectorAll('.custom-radio')
         choice.forEach(item => item.addEventListener('click', (e) => {
+            // Самовывоз
             if (!document.querySelector('.our-address') && document.getElementById('pickup').checked) {
                 this.pickup()
                 document.querySelector('.deliveryDetails_text').textContent = `При оформлении Самовывоза для
@@ -109,9 +116,11 @@ const ordering = {
                      свяжется оператор. Если в течение 1 часа
                      вам не перезвонили, свяжитесь с нами
                      по телефону +1 123 456 78 90`
+                // Удаляем шаблон с запросом адреса, если выбран самовывоз
                 if (document.querySelector('.address')) {
                     document.querySelector('.address').remove()
                 }
+            // Доставка
             } else if (!document.querySelector('.address') && document.getElementById('delivery').checked) {
                 this.delivery()
                 document.querySelector('.deliveryDetails_text').textContent = `При оформлении Доставки для уточнения
@@ -119,6 +128,7 @@ const ordering = {
                                     оператор. Если в течение 1 часа вам
                                     не перезвонили, свяжитесь с нами
                                     по телефону +1 123 456 78 90`
+                // Удаляем шаблон самовывоза, если выбрана доставка
                 if (document.querySelector('.our-address')) {
                     document.querySelector('.our-address').remove()
                 }
@@ -126,6 +136,7 @@ const ordering = {
         }))
         this.validate()
     },
+    // Возвращение в корзину при клике на "Вернуться в корзину"
     backCart() {
         document.querySelector('.backCart').addEventListener('click', (e) => {
             document.querySelector('.order').remove()
@@ -133,6 +144,7 @@ const ordering = {
             cartInit()
         })
     },
+    // Валидация
     validate() {
         document.getElementById('submit').addEventListener('click', (e) => {
             e.preventDefault()
@@ -145,6 +157,7 @@ const ordering = {
                 removeErrors()
                 this.validRadio('.chooseDelivery', chooseDelivery)
                 this.validRadio('.payment', payment)
+                // Переменная указывающая что поля не валидны
                 let notValid = false
                 for (let i = 0; i < inputs.length; i++) {
                     if (inputs[i].value === '') {
@@ -167,6 +180,7 @@ const ordering = {
             }
         })
     },
+    // Валидация блоков "Способ получения" и "Способ оплаты"
     validRadio(name, el){
         document.querySelector(name).addEventListener('click', (e) => {
             if (e.target === el[0] || el[1]){
@@ -184,14 +198,14 @@ const ordering = {
         }
     }
 }
-
+// Сообщение об ошибке при заполнении полей
 function errorMessage(where, text) {
     where.insertAdjacentHTML('afterend', `
         <div class="error">
         <p>${text}</p>
         </div>`)
 }
-
+// Удаление всех ошибок
 function removeErrors() {
     Array.from(document.querySelectorAll('.error')).forEach(item => {
         item.remove()

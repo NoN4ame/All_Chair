@@ -10,6 +10,7 @@ const slider = {
     init() {
         this.render()
     },
+    // При клике на фотографии отрисовываем большую версию фотографии
     render() {
         let container = document.querySelector('.our-projects__content')
         let photo = container.querySelectorAll('.photo_container')
@@ -27,19 +28,18 @@ const slider = {
             this.openImg(item)
         }))
     },
+    // Закрытия большой картинки
     closeGallery() {
         let closeBlock =  document.querySelector('.invisible')
         closeBlock.addEventListener('click', (e) => {
-            console.log(e.target);
-
-            console.log(document.getElementById('photo').style.backgroundSize);
-            if (e.target !== document.getElementById('photo')) {
+            if (e.target !== document.getElementById('photo') || e.target === document.getElementById('photo')) {
                prodCard.delStyle()
             }
         })
     },
-
+    // Поиск большой картинки
     openImg(item){
+        // Берем название атрибута и если оно совподет с одним из названий в объекте gallery, то подгружаем ее
         let src = item.querySelector('.photo').getAttribute('alt')
         switch (src) {
             case 'project1' : if (src === 'project1')

@@ -555,6 +555,15 @@ label {
   margin-top: 10px;
 }
 
+@-moz-document url-prefix() {
+  .error {
+    width: 265px !important;
+  }
+
+  .btn {
+    white-space: nowrap;
+  }
+}
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   /* display: none; <- Crashes Chrome on hover */
   -webkit-appearance: none;
@@ -1416,6 +1425,15 @@ label {
   margin-top: 10px;
 }
 
+@-moz-document url-prefix() {
+  .error {
+    width: 265px !important;
+  }
+
+  .btn {
+    white-space: nowrap;
+  }
+}
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   /* display: none; <- Crashes Chrome on hover */
   -webkit-appearance: none;
