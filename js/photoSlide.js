@@ -43,19 +43,15 @@ const slider = {
         let src = item.querySelector('.photo').getAttribute('alt')
         switch (src) {
             case 'project1' : if (src === 'project1')
-                console.log(gallery[0].project1)
                 document.getElementById('photo').style.backgroundImage = `url('${gallery[0].project1}')`
                 break
             case 'project2' : if (src === 'project2')
-                console.log(gallery[0].project2)
                 document.getElementById('photo').style.backgroundImage = `url('${gallery[0].project2}')`
                 break
             case 'project3' : if (src === 'project3')
-                console.log(gallery[0].project3)
                 document.getElementById('photo').style.backgroundImage = `url('${gallery[0].project3}')`
                 break
             case 'project4' : if (src === 'project4')
-                console.log(gallery[0].project4)
                 document.getElementById('photo').style.backgroundImage = `url('${gallery[0].project4}')`
                 break
         }
