@@ -38,7 +38,7 @@ const renderCart = () => {
                             <li class="cart-item__vendorCode">${cart[i].vendorCode}</li>
                         </ul>
                     <section class="cart-item__quantity">
-                         <span class="minus">-</span>
+                         <span class="minus block">-</span>
                          <p class="quantity-result">${cart[i].quantity}</p>
                          <span class="plus">+</span>
                     </section>
@@ -70,6 +70,14 @@ const quantity = () => {
             // Нижняя часть корзины
             totalPrice()
             discount()
+            // Стили кнопок + и -
+            // Если кол-во равно 4 то добавляем класс 'block' кнопке +
+            if( find.quantity === 4 ){
+                plus.classList.add('block')
+            // Если кол-во больше 1 то удаляем класс 'block' кнопке -
+            } else if (find.quantity > 1){
+                minus.classList.remove('block')
+            }
         } else if (e.target === minus && find.quantity > 1) {
             find.quantity--
             el.querySelector('.quantity-result').innerHTML = String(find.quantity)
@@ -77,6 +85,14 @@ const quantity = () => {
             // Нижняя часть корзины
             totalPrice()
             discount()
+            // Стили кнопок + и -
+            // Если кол-во равно 1 то добавляем класс 'block' кнопке -
+            if( find.quantity === 1 ){
+                minus.classList.add('block')
+                // Если кол-во меньше 4 то удаляем класс 'block' кнопке +
+            } else if (find.quantity < 4){
+                plus.classList.remove('block')
+            }
         }
     }))
 }

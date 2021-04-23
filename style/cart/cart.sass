@@ -96,10 +96,14 @@
       height: 22px
       width: 22px
       text-align: center !important
+      line-height: 23px
+      padding-left: 1px
       &:hover
         border-color: $black
         color: $black
         cursor: pointer
+    &>.minus
+      line-height: 20px
     &>.quantity-result
       padding: 0 12px
       color: $black
@@ -128,6 +132,9 @@
         line-height: 27px
         display: block
         transform: rotate(45deg)
+      &:hover
+        color: black
+        border-color: black
   & span
     text-align: right
 .item-img
@@ -169,7 +176,7 @@
       font-size: $price
       text-align: right
 .minus
-  line-height: 20px
+  line-height: 19.5px
 .promo-code, .result
   margin-top: 44px
 .delete-block-filter
@@ -196,4 +203,9 @@
   &>.return_inCart
     border-bottom: 1px solid
     cursor: pointer
-
+.block
+  color: $gray !important
+  border-color: $gray !important
+  &:hover
+    color: $gray
+    border-color: $gray
