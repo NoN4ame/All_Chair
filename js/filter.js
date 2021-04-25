@@ -7,7 +7,7 @@ const filter = {
     filter_category (){
        let filter_contain = document.querySelector('.filter')
         filter_contain.querySelectorAll('.all-products__category')
-            .forEach(item => item.addEventListener('click', (e) => {
+            .forEach(item => item.addEventListener('click', () => {
                 this.choice_products(item)
             }))
     },

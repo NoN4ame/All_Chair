@@ -107,7 +107,7 @@ const ordering = {
     // Рендер шаблонов по доставке или самовывозе (в зависимости от выбранного)
     choice() {
         let choice = document.querySelectorAll('.custom-radio')
-        choice.forEach(item => item.addEventListener('click', (e) => {
+        choice.forEach(item => item.addEventListener('click', () => {
             // Самовывоз
             if (!document.querySelector('.our-address') && document.getElementById('pickup').checked) {
                 this.pickup()
@@ -138,7 +138,7 @@ const ordering = {
     },
     // Возвращение в корзину при клике на "Вернуться в корзину"
     backCart() {
-        document.querySelector('.backCart').addEventListener('click', (e) => {
+        document.querySelector('.backCart').addEventListener('click', () => {
             document.querySelector('.order').remove()
             document.querySelector('.invisible').remove()
             cartInit()

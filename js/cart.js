@@ -14,8 +14,8 @@ function cartInit() {
                     <img class="close" src="../img/other/close.svg" alt="close">
                   </div>
             </div>`)
-    if (sessionStorage.key(0) === 'array') {
-        cart = JSON.parse(sessionStorage.getItem('array'))
+    if (localStorage.key(0) === 'array') {
+        cart = JSON.parse(localStorage.getItem('array'))
         renderCart()
     } else {
         if (cart.length === 0) {
@@ -277,19 +277,19 @@ function order() {
 function localData() {
     if (cart.length > 0) {
         let cartData = JSON.stringify(cart)
-        sessionStorage.setItem('array', cartData)
+        localStorage.setItem('array', cartData)
     }
 }
 
 // Удаление хранилища
 function removeData() {
-    sessionStorage.removeItem('array')
+    localStorage.removeItem('array')
 }
 
 // Подсчет кол-ва товара из локального хранилища
 function cartCounter() {
-    if (cart.length === 0 && sessionStorage.key(0) === 'array') {
-        cart = JSON.parse(sessionStorage.getItem('array'))
+    if (cart.length === 0 && localStorage.key(0) === 'array') {
+        cart = JSON.parse(localStorage.getItem('array'))
         document.getElementById('cart').insertAdjacentHTML
         ('beforeend', `<span class="quantity"></span>`)
         document.querySelector('.quantity').innerHTML = cart.length
