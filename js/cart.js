@@ -11,7 +11,7 @@ function cartInit() {
         `<div class="invisible">
                     <div class="cart">
                     <h1>КОРЗИНА</h1>
-                    <img class="close" src="../img/other/close.svg" alt="close">
+                    <img class="close" src="img/other/close.svg" alt="close">
                   </div>
             </div>`)
     if (localStorage.key(0) === 'array') {
@@ -72,10 +72,10 @@ const quantity = () => {
             discount()
             // Стили кнопок + и -
             // Если кол-во равно 4 то добавляем класс 'block' кнопке +
-            if( find.quantity === 4 ){
+            if (find.quantity === 4) {
                 plus.classList.add('block')
-            // Если кол-во больше 1 то удаляем класс 'block' кнопке -
-            } else if (find.quantity > 1){
+                // Если кол-во больше 1 то удаляем класс 'block' кнопке -
+            } else if (find.quantity > 1) {
                 minus.classList.remove('block')
             }
         } else if (e.target === minus && find.quantity > 1) {
@@ -87,10 +87,10 @@ const quantity = () => {
             discount()
             // Стили кнопок + и -
             // Если кол-во равно 1 то добавляем класс 'block' кнопке -
-            if( find.quantity === 1 ){
+            if (find.quantity === 1) {
                 minus.classList.add('block')
                 // Если кол-во меньше 4 то удаляем класс 'block' кнопке +
-            } else if (find.quantity < 4){
+            } else if (find.quantity < 4) {
                 plus.classList.remove('block')
             }
         }
@@ -156,7 +156,7 @@ const delItem = (cartItem) => {
 const emptyCart = () => {
     document.querySelector('.cart').insertAdjacentHTML('beforeend',
         `<p class="empty-cart">Корзина Пуста</p>
-                                          <a href="../templates/catalog.html">
+                                          <a href="catalog.html">
                                               <button class="btn">В каталог</button>
                                           </a>`)
 }
@@ -193,6 +193,7 @@ function cartBottom() {
     // Вызов метода, промокода
     promoCode()
 }
+
 // Расчет скидки
 function discount() {
     let findDiscount = cart.filter(item => item.currentDiscount)
@@ -230,10 +231,10 @@ function promoCode() {
 function triggers() {
     prodCard.styleCard()
     scroll()
-    if (document.querySelector('.new-collection')){
+    if (document.querySelector('.new-collection')) {
         document.querySelector('.new-collection').style.filter = 'brightness(0.5)'
     }
-    if (document.querySelector('.subscribe')){
+    if (document.querySelector('.subscribe')) {
         document.querySelector('.subscribe').style.filter = 'brightness(0.5)'
     }
     // Получаем блок обертку
@@ -252,11 +253,12 @@ function triggers() {
         // Если наведение было по иконке 'X'
         if (e.target === document.querySelector('.close')) {
             // Меняем ее на иконку розового цвета
-            document.querySelector('.close').src = '../img/other/close-pink.svg'
+            document.querySelector('.close').src = 'img/other/close-pink.svg'
             // Если курсор не на иконке, то оставляем стандартную иконку
-        } else document.querySelector('.close').src = '../img/other/close.svg'
+        } else document.querySelector('.close').src = 'img/other/close.svg'
     })
 }
+
 // Вертикальная прокрутка корзины если товаров 3 и больше
 function scroll() {
     if (cart.length >= 3) {

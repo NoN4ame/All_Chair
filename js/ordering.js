@@ -11,7 +11,7 @@ const ordering = {
             // Рендер шаблона оформления заказа
             document.querySelector('.invisible').insertAdjacentHTML('beforeend',
                 `<div class="order">
-                        <img class="close" src="../img/other/close.svg" alt="">
+                        <img class="close" src="img/other/close.svg" alt="">
                         <a class="backCart" href="#">Вернуться в корзину</a>
                         <h1>ОФОРМЛЕНИЕ ЗАКАЗА</h1>
                         <form novalidate id="formResult" action="#">
@@ -81,7 +81,7 @@ const ordering = {
                      <p class="aboutRecipient__text">Пункт самовывоза:</p>
                      <ul>
                          <li>
-                             <img src="../img/other/marker.svg" alt="marker">
+                             <img src="img/other/marker.svg" alt="marker">
                              <p>Москва, ул. Арбат, д. 29</p>
                          </li>
                          <li>
@@ -91,7 +91,7 @@ const ordering = {
                              <p>+1 123 456 78 90</p>
                          </li>
                          <li>
-                             <a href="https://goo.gl/maps/yb1yx2LxuXiY7o7S7" target="_blank"><img src="../img/other/map.jpg" alt=""></a>
+                             <a href="https://goo.gl/maps/yb1yx2LxuXiY7o7S7" target="_blank"><img src="img/other/map.jpg" alt=""></a>
                          </li>
                      </ul>
                      </section>`)

@@ -10,8 +10,8 @@ const feedBack = {
                 document.querySelector('.main').insertAdjacentHTML('afterbegin',
                     `<div class="invisible subscribe-block">
                             <div class="subscribe-card">
-                                <img src="../img/other/subscribe.png" alt="">
-                                 <img class="close" src="../img/other/close.svg" alt="close">
+                                <img src="img/other/subscribe.png" alt="">
+                                 <img class="close" src="img/other/close.svg" alt="close">
                                 <p class="subscribe-card__text">ПОДПИСКА НА КАТАЛОГ</p>
                                 <p class="subscribe-card__text">Введите контактные данные для получения<br>
                                 обновленного каталога продукции каждый месяц</p>
@@ -44,9 +44,9 @@ const feedBack = {
             // Если наведение было по иконке 'X'
             if (e.target === document.querySelector('.close')) {
                 // Меняем ее на иконку розового цвета
-                document.querySelector('.close').src = '../img/other/close-pink.svg'
+                document.querySelector('.close').src = 'img/other/close-pink.svg'
                 // Если курсор не на иконке, то оставляем стандартную иконку
-            } else document.querySelector('.close').src = '../img/other/close.svg'
+            } else document.querySelector('.close').src = 'img/other/close.svg'
         })
     },
     validation(event) {

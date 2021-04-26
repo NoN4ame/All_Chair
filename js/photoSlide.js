@@ -1,9 +1,9 @@
 const gallery = [
     {
-        project1: "../img/our_projects/big/project_1.jpg",
-        project2: "../img/our_projects/big/project_2.jpg",
-        project3: "../img/our_projects/big/project_3.jpg",
-        project4: "../img/our_projects/big/project_4.jpg",
+        project1: "img/our_projects/big/project_1.jpg",
+        project2: "img/our_projects/big/project_2.jpg",
+        project3: "img/our_projects/big/project_3.jpg",
+        project4: "img/our_projects/big/project_4.jpg",
     }
 ]
 const slider = {

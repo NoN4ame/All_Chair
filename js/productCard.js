@@ -57,7 +57,7 @@ const prodCard = {
             `  <div class="invisible">
                         <div class="card">
                         <img id="src_img" src="${imgSrc}" alt="">
-                        <img class="close" src="../img/other/close.svg" alt="close">
+                        <img class="close" src="img/other/close.svg" alt="close">
                         <div class="card__info">
                             <p class="card__name">${name}</p>
                             <p class="card__vendorCode">${vendorCode}</p>
@@ -137,9 +137,9 @@ const prodCard = {
             // Если наведение было по иконке 'X'
             if (e.target === document.querySelector('.close')) {
                 // Меняем ее на иконку розового цвета
-                document.querySelector('.close').src = '../img/other/close-pink.svg'
+                document.querySelector('.close').src = 'img/other/close-pink.svg'
                 // Если курсор не на иконке, то оставляем стандартную иконку
-            } else document.querySelector('.close').src = '../img/other/close.svg'
+            } else document.querySelector('.close').src = 'img/other/close.svg'
         })
         // Обработчик событий по добавлению товара в корзину
         card.querySelector('.card').addEventListener('click', (e) => {
@@ -183,7 +183,7 @@ const prodCard = {
                 buyButton.remove()
                 document.querySelector('.card__aboutGoods').insertAdjacentHTML('beforebegin', `
                             <div class="cart__itemAdded">
-                                <img src="../img/other/added.svg" alt="added">
+                                <img src="img/other/added.svg" alt="added">
                                 <p>В КОРЗИНЕ</p>
                                 <p>Вы можете изменить кол-во товара <span id="inCart">в корзине</span></p>
                             </div>
@@ -216,7 +216,7 @@ const prodCard = {
             document.getElementById('in_cart').remove()
             document.querySelector('.card__aboutGoods').insertAdjacentHTML('beforebegin', `
                             <div class="cart__itemAdded">
-                                <img src="../img/other/added.svg" alt="added">
+                                <img src="img/other/added.svg" alt="added">
                                 <p>В КОРЗИНЕ</p>
                                 <p>Вы можете изменить кол-во товара <span id="inCart">в корзине</span></p>
                             </div>
